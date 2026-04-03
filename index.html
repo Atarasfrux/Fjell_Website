@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FJELL™ — Modular Micro-Cabin System | Norwegian Design</title>
+<meta name="description" content="Professional DXF & STL files for modular cabins under 15m². No building permit needed in Norway. Build in a weekend. 40-45% cheaper than competitors.">
+<meta name="keywords" content="modular cabin, DIY cabin, micro cabin Norway, 12m2 cabin, cabin build kit, DXF files CNC, tiny house plans, Norwegian cabin design">
+<meta property="og:title" content="FJELL™ — Build a Cabin. From Files.">
+<meta property="og:description" content="Professional modular cabin system. 40 DXF files + 6 STL files. No building permit. One weekend build.">
+<meta property="og:type" content="website">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#fafaf8;--bg2:#f0efe8;--text:#1a1a1a;--muted:#6b6b6b;
+--green:#2d5a27;--green-light:#e8f0e6;--green-accent:#4a8c3f;
+--sand:#d4c5a9;--sand-light:#f5f0e6;
+--card:#ffffff;--border:#e5e2da;
+--radius:12px;--radius-lg:20px;
+--shadow:0 4px 24px rgba(0,0,0,.06);
+--shadow-lg:0 12px 40px rgba(0,0,0,.1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--green-accent);text-decoration:none;transition:color .2s}
+a:hover{color:var(--green)}
+img{max-width:100%;display:block}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:1.3rem;font-weight:800;letter-spacing:.08em;color:var(--green)}
+.nav-logo span{font-weight:400;color:var(--muted);font-size:.75rem;margin-left:8px;letter-spacing:0}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--green)}
+.nav-cta{background:var(--green);color:#fff;padding:8px 20px;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .2s}
+.nav-cta:hover{background:var(--green-accent);color:#fff;transform:translateY(-1px)}
+.nav-mobile{display:none;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text)}
+
+/* HERO */
+.hero{padding:160px 24px 100px;text-align:center;max-width:900px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-light);color:var(--green);padding:8px 18px;border-radius:24px;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;background:var(--green-accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;line-height:1.1;margin-bottom:20px;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--green-accent)}
+.hero p{font-size:1.2rem;color:var(--muted);max-width:640px;margin:0 auto 40px;line-height:1.8}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:10px;font-size:.95rem;font-weight:600;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-accent);color:#fff;transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-secondary{background:var(--card);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+
+/* STATS */
+.stats{padding:60px 24px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.stat-num{font-size:2.2rem;font-weight:800;color:var(--green);margin-bottom:4px}
+.stat-label{font-size:.82rem;color:var(--muted);line-height:1.4}
+
+/* SECTIONS */
+section{padding:90px 24px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--green-accent);margin-bottom:8px}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;margin-bottom:14px;letter-spacing:-.02em}
+.section-desc{color:var(--muted);max-width:640px;margin-bottom:50px;font-size:1.05rem;line-height:1.7}
+
+/* CABINS */
+.cabins{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.cabin-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .25s}
+.cabin-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.cabin-visual{height:220px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+.cabin-visual.land{background:linear-gradient(135deg,#e8f0e6 0%,#d4e4d0 100%)}
+.cabin-visual.camp{background:linear-gradient(135deg,#f5f0e6 0%,#e8dcc8 100%)}
+.cabin-visual.form{background:linear-gradient(135deg,#e6ecf0 0%,#d0dce4 100%)}
+.cabin-visual.roam{background:linear-gradient(135deg,#f0e6e6 0%,#e4d0d0 100%)}
+.cabin-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(45,90,39,.06),rgba(212,197,169,.08))}
+.cabin-tag{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.9);padding:4px 12px;border-radius:6px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--green);z-index:1}
+.cabin-body{padding:28px}
+.cabin-body h3{font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.cabin-body .cabin-size{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+.cabin-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.cabin-spec{font-size:.8rem;padding:10px 14px;background:var(--bg2);border-radius:8px}
+.cabin-spec strong{display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px}
+.cabin-price{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--border)}
+.cabin-price .price{font-size:1.1rem;font-weight:700;color:var(--green)}
+.cabin-price .price span{font-size:.78rem;font-weight:400;color:var(--muted)}
+.cabin-price .btn{padding:10px 20px;font-size:.82rem}
+
+/* PRICING */
+.pricing-section{background:var(--bg2)}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pricing-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;position:relative;transition:all .25s}
+.pricing-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pricing-card.featured{border-color:var(--green);box-shadow:0 0 0 2px var(--green)}
+.pricing-card.featured::before{content:'Most Popular';position:absolute;top:-14px;left:28px;background:var(--green);color:#fff;padding:6px 16px;border-radius:8px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.pricing-tier{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.pricing-price{font-size:2.4rem;font-weight:800;margin-bottom:4px}
+.pricing-price span{font-size:.88rem;font-weight:400;color:var(--muted)}
+.pricing-desc{font-size:.88rem;color:var(--muted);margin-bottom:28px;padding-bottom:28px;border-bottom:1px solid var(--border);line-height:1.6}
+.pricing-features{list-style:none;margin-bottom:32px}
+.pricing-features li{padding:7px 0;font-size:.88rem;display:flex;align-items:flex-start;gap:10px}
+.pricing-features li::before{content:'✓';color:var(--green-accent);font-weight:700;flex-shrink:0;margin-top:1px}
+.pricing-card .btn{width:100%;justify-content:center}
+
+/* COMING SOON BANNER */
+.coming-soon{background:linear-gradient(135deg,var(--green) 0%,#1a3d16 100%);color:#fff;border-radius:var(--radius-lg);padding:48px 40px;margin-top:50px;position:relative;overflow:hidden}
+.coming-soon::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent);border-radius:50%}
+.coming-soon h3{font-size:1.4rem;font-weight:700;margin-bottom:10px}
+.coming-soon p{opacity:.9;margin-bottom:20px;max-width:600px;line-height:1.7}
+.coming-soon .price-table{background:rgba(255,255,255,.1);border-radius:12px;padding:20px;margin-top:20px}
+.coming-soon .price-table table{width:100%;border-collapse:collapse}
+.coming-soon .price-table th,.coming-soon .price-table td{padding:10px 16px;text-align:left;font-size:.85rem}
+.coming-soon .price-table th{font-weight:600;border-bottom:1px solid rgba(255,255,255,.2);font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;opacity:.8}
+.coming-soon .price-table td{border-bottom:1px solid rgba(255,255,255,.08)}
+.coming-soon .price-table .price-val{font-weight:700}
+.badge-soon{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:4px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;margin-left:8px}
+
+/* COMPARISON */
+.comparison-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border)}
+.comparison-table th,.comparison-table td{padding:14px 20px;text-align:center;font-size:.88rem;border-bottom:1px solid var(--border)}
+.comparison-table th{background:var(--bg2);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.comparison-table th:first-child,.comparison-table td:first-child{text-align:left}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table .highlight{background:var(--green-light);font-weight:600;color:var(--green)}
+.comparison-table .competitor{color:var(--muted);font-style:italic}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.tool-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;transition:all .25s}
+.tool-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool-icon{font-size:2.2rem;margin-bottom:14px}
+.tool-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.tool-card p{font-size:.88rem;color:var(--muted);margin-bottom:18px;line-height:1.6}
+.tool-tags{display:flex;gap:8px;flex-wrap:wrap}
+.tool-tag{display:inline-block;background:var(--green-light);color:var(--green);padding:4px 12px;border-radius:6px;font-size:.72rem;font-weight:600}
+
+/* FAQ */
+.faq-list{max-width:750px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:22px 0;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;transition:color .2s}
+.faq-q:hover{color:var(--green)}
+.faq-q::after{content:'+';font-size:1.3rem;color:var(--muted);transition:transform .2s;flex-shrink:0;margin-left:16px}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:.9rem;color:var(--muted);line-height:1.8}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:22px}
+
+/* CTA */
+.cta-section{text-align:center;background:linear-gradient(135deg,var(--green) 0%,#1a3d16 100%);color:#fff;border-radius:var(--radius-lg);padding:70px 40px;margin:0 24px 80px;max-width:1100px;margin-left:auto;margin-right:auto;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:-40%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent);border-radius:50%}
+.cta-section h2{font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:800;margin-bottom:14px}
+.cta-section p{opacity:.88;margin-bottom:32px;font-size:1.05rem;max-width:550px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta-section .btn{background:#fff;color:var(--green);font-size:1rem;padding:16px 36px}
+.cta-section .btn:hover{background:var(--sand-light);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{padding:50px 24px 30px;border-top:1px solid var(--border)}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.footer-brand .logo{font-size:1.2rem;font-weight:800;color:var(--green);margin-bottom:8px}
+.footer-brand p{font-size:.85rem;color:var(--muted);line-height:1.6;max-width:320px}
+.footer-col h4{font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text);margin-bottom:14px}
+.footer-col a{display:block;font-size:.88rem;color:var(--muted);padding:4px 0;transition:color .2s}
+.footer-col a:hover{color:var(--green)}
+.footer-bottom{max-width:1100px;margin:30px auto 0;padding-top:24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted)}
+.footer-bottom .eco{display:flex;align-items:center;gap:6px;color:var(--green);font-size:.82rem}
+
+/* MOBILE */
+@media(max-width:900px){
+.cabins{grid-template-columns:1fr}
+.pricing-grid{grid-template-columns:1fr}
+.stats-grid{grid-template-columns:repeat(2,1fr)}
+.tools-grid{grid-template-columns:1fr}
+.footer-inner{grid-template-columns:1fr}
+.comparison-table{font-size:.78rem}
+.comparison-table th,.comparison-table td{padding:10px 12px}
+}
+@media(max-width:768px){
+.nav-links{display:none}
+.nav-mobile{display:block}
+.hero{padding:130px 20px 70px}
+.hero h1{font-size:2.2rem}
+section{padding:70px 20px}
+.cta-section{margin:0 16px 60px;padding:50px 28px}
+.stats-grid{gap:20px}
+.stat-num{font-size:1.8rem}
+.cabin-specs{grid-template-columns:1fr}
+.footer-bottom{flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav-inner">
+<div class="nav-logo">FJELL™ <span>Modular Micro-Cabins</span></div>
+<ul class="nav-links">
+<li><a href="#cabins">Cabins</a></li>
+<li><a href="#pricing">Digital Files</a></li>
+<li><a href="#comparison">Comparison</a></li>
+<li><a href="#tools">Tools</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+<a href="#pricing" class="nav-cta">Get Files</a>
+<button class="nav-mobile" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
+</div>
+</nav>
+
+<section class="hero">
+<div class="hero-badge"><span class="dot"></span> Norwegian Design · No Building Permit · Under 15m²</div>
+<h1>Build a cabin.<br><em>From files.</em></h1>
+<p>40 precision DXF files + 6 STL files for modular cabins engineered for Nordic climates. Manufacture connectors yourself, source materials locally, build in one weekend.</p>
+<div class="hero-actions">
+<a href="#pricing" class="btn btn-primary">View Pricing →</a>
+<a href="#cabins" class="btn btn-secondary">See 4 Packages ↓</a>
+</div>
+</section>
+
+<div class="stats">
+<div class="stats-grid">
+<div><div class="stat-num">40</div><div class="stat-label">DXF Files<br>(CNC-Ready)</div></div>
+<div><div class="stat-num">6</div><div class="stat-label">STL Files<br>(3D Printable)</div></div>
+<div><div class="stat-num">≤15m²</div><div class="stat-label">No Permit<br>(PBL §20-4)</div></div>
+<div><div class="stat-num">52h</div><div class="stat-label">One Weekend<br>Build Time</div></div>
+</div>
+</div>
+
+<section id="cabins">
+<div class="section-inner">
+<div class="section-label">Four Packages</div>
+<h2 class="section-title">Choose your cabin</h2>
+<p class="section-desc">All under 15m² BYA. All designed for Norwegian weather. All built from the same file system. Fixed foundation to mobile — we have you covered.</p>
+<div class="cabins">
+
+<div class="cabin-card">
+<div class="cabin-visual land">🏔️<span class="cabin-tag">Most Popular</span></div>
+<div class="cabin-body">
+<h3>LAND</h3>
+<div class="cabin-size">12.42m² interior · Fixed foundation</div>
+<div class="cabin-specs">
+<div class="cabin-spec"><strong>Exterior</strong>2,900 × 4,900mm</div>
+<div class="cabin-spec"><strong>Interior</strong>2,700 × 4,600mm</div>
+<div class="cabin-spec"><strong>Height</strong>2,700mm clear</div>
+<div class="cabin-spec"><strong>BYA</strong>14.85m² ✓</div>
+</div>
+<div class="cabin-price">
+<div class="price">Files from 2,500 NOK <span>/ €250</span></div>
+<a href="#pricing" class="btn btn-secondary">Get Files</a>
+</div>
+</div>
+</div>
+
+<div class="cabin-card">
+<div class="cabin-visual camp">🚛</div>
+<div class="cabin-body">
+<h3>CAMP</h3>
+<div class="cabin-size">12.69m² interior · Trailer-transportable</div>
+<div class="cabin-specs">
+<div class="cabin-spec"><strong>Exterior</strong>2,550 × 5,600mm</div>
+<div class="cabin-spec"><strong>Interior</strong>2,350 × 5,400mm</div>
+<div class="cabin-spec"><strong>Road Width</strong>2,550mm ✓</div>
+<div class="cabin-spec"><strong>BYA</strong>14.94m² ✓</div>
+</div>
+<div class="cabin-price">
+<div class="price">Files from 2,500 NOK <span>/ €250</span></div>
+<a href="#pricing" class="btn btn-secondary">Get Files</a>
+</div>
+</div>
+</div>
+
+<div class="cabin-card">
+<div class="cabin-visual form">🔧</div>
+<div class="cabin-body">
+<h3>FORM</h3>
+<div class="cabin-size">~12m² interior · Custom dimensions</div>
+<div class="cabin-specs">
+<div class="cabin-spec"><strong>Width</strong>Custom</div>
+<div class="cabin-spec"><strong>Length</strong>Custom</div>
+<div class="cabin-spec"><strong>System</strong>Same structural</div>
+<div class="cabin-spec"><strong>BYA</strong>≤15m² ✓</div>
+</div>
+<div class="cabin-price">
+<div class="price">Files from 2,500 NOK <span>/ €250</span></div>
+<a href="#pricing" class="btn btn-secondary">Get Files</a>
+</div>
+</div>
+</div>
+
+<div class="cabin-card">
+<div class="cabin-visual roam">🚚</div>
+<div class="cabin-body">
+<h3>ROAM</h3>
+<div class="cabin-size">12.65m² interior · Permanent trailer chassis</div>
+<div class="cabin-specs">
+<div class="cabin-spec"><strong>Exterior</strong>2,500 × 5,700mm</div>
+<div class="cabin-spec"><strong>Interior</strong>2,300 × 5,500mm</div>
+<div class="cabin-spec"><strong>Road Width</strong>2,528mm ✓</div>
+<div class="cabin-spec"><strong>BYA</strong>14.44m² ✓</div>
+</div>
+<div class="cabin-price">
+<div class="price">Files from 2,500 NOK <span>/ €250</span></div>
+<a href="#pricing" class="btn btn-secondary">Get Files</a>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="pricing" class="pricing-section">
+<div class="section-inner">
+<div class="section-label">Three Tiers</div>
+<h2 class="section-title">Digital file packages</h2>
+<p class="section-desc">Every tier includes all 40 DXF files, 6 STL files, and interactive browser tools. Instant digital delivery.</p>
+<div class="pricing-grid">
+
+<div class="pricing-card">
+<div class="pricing-tier">Basic</div>
+<div class="pricing-price">€250 <span>/ 2,500 NOK / $250</span></div>
+<div class="pricing-desc">Everything you need to start manufacturing and building.</div>
+<ul class="pricing-features">
+<li>All 40 DXF files (CNC-ready)</li>
+<li>All 6 STL files (3D printable)</li>
+<li>Essential assembly guide</li>
+<li>Material cost calculator (browser)</li>
+<li>Maintenance calendar (browser)</li>
+<li>Instant digital download</li>
+<li>2 browser tools (works offline)</li>
+</ul>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20BASIC%20Order" class="btn btn-secondary">Get BASIC</a>
+</div>
+
+<div class="pricing-card featured">
+<div class="pricing-tier">Complete</div>
+<div class="pricing-price">€350 <span>/ 4,500 NOK / $450</span></div>
+<div class="pricing-desc">Full documentation for a confident, error-free build.</div>
+<ul class="pricing-features">
+<li>Everything in BASIC</li>
+<li>Complete assembly guide (100+ pages)</li>
+<li>Full material take-off list</li>
+<li>Tool requirements checklist</li>
+<li>Build timeline & sequencing</li>
+<li>Supplier recommendations (NO/LT/EU)</li>
+<li>Drainage best practices guide</li>
+<li>Interior utility system plans</li>
+</ul>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20COMPLETE%20Order" class="btn btn-primary">Get COMPLETE</a>
+</div>
+
+<div class="pricing-card">
+<div class="pricing-tier">Premium</div>
+<div class="pricing-price">€800 <span>/ 10,000 NOK / $1,000</span></div>
+<div class="pricing-desc">Files, support, and hand-holding included.</div>
+<ul class="pricing-features">
+<li>Everything in COMPLETE</li>
+<li>Video tutorials (2 hours)</li>
+<li>3 consultation calls (1hr each)</li>
+<li>6 months priority support</li>
+<li>Custom file modifications</li>
+<li>Builder certification</li>
+<li>STEP/IGES 3D CAD files</li>
+<li>Direct engineer access</li>
+</ul>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20PREMIUM%20Order" class="btn btn-secondary">Get PREMIUM</a>
+</div>
+
+</div>
+
+<div class="coming-soon">
+<h3>🏗️ Full Material Kits — Coming Q2 2026</h3>
+<p>Pre-cut materials + CNC connectors delivered to your site. Based on verified cost analysis, still 40-45% below Norwegian competitors.</p>
+<div class="price-table">
+<table>
+<tr>
+<th>Package</th>
+<th>Digital Files</th>
+<th>Full Kit (Self-Build)</th>
+<th>Turnkey (We Build)</th>
+</tr>
+<tr>
+<td><strong>LAND</strong></td>
+<td>2,500 NOK</td>
+<td class="price-val">~175,000 NOK</td>
+<td class="price-val">~250,000 NOK</td>
+</tr>
+<tr>
+<td><strong>CAMP</strong></td>
+<td>2,500 NOK</td>
+<td class="price-val">~180,000 NOK</td>
+<td class="price-val">~260,000 NOK</td>
+</tr>
+<tr>
+<td><strong>FORM</strong></td>
+<td>2,500 NOK</td>
+<td class="price-val">~175,000 NOK</td>
+<td class="price-val">~250,000 NOK</td>
+</tr>
+<tr>
+<td><strong>ROAM</strong></td>
+<td>2,500 NOK</td>
+<td class="price-val">~210,000 NOK</td>
+<td class="price-val">~320,000 NOK</td>
+</tr>
+</table>
+</div>
+<p style="margin-top:16px;font-size:.82rem;opacity:.7">* Prices include 25% Norwegian VAT. Based on dimension-based material cost analysis. Final pricing subject to supplier verification. <span class="badge-soon">Q2 2026</span></p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="comparison">
+<div class="section-inner">
+<div class="section-label">Market Comparison</div>
+<h2 class="section-title">Why FJELL™ wins</h2>
+<p class="section-desc">Real competitor data from the Norwegian market (2026). FJELL delivers comparable quality at a fraction of the cost.</p>
+
+<table class="comparison-table">
+<tr>
+<th>Product</th>
+<th>Size</th>
+<th>Price (NOK)</th>
+<th>NOK/m²</th>
+<th>Type</th>
+</tr>
+<tr class="competitor">
+<td>Norske Mikrohus (Rast)</td>
+<td>~18m²</td>
+<td>~1,090,000</td>
+<td>~60,500</td>
+<td>Turnkey</td>
+</tr>
+<tr class="competitor">
+<td>Norske Mikrohus (Flor)</td>
+<td>30m²</td>
+<td>~1,590,000</td>
+<td>~53,000</td>
+<td>Turnkey</td>
+</tr>
+<tr class="competitor">
+<td>Modulbygg Veslemøy</td>
+<td>~20m²</td>
+<td>527,000</td>
+<td>~26,350</td>
+<td>Kit (no EL/VVS)</td>
+</tr>
+<tr class="competitor">
+<td>MCabin Line M24</td>
+<td>24m²</td>
+<td>~450,000+</td>
+<td>~18,750</td>
+<td>Base kit</td>
+</tr>
+<tr class="highlight">
+<td><strong>FJELL LAND (files + self-build)</strong></td>
+<td><strong>12.42m²</strong></td>
+<td><strong>~74,000</strong></td>
+<td><strong>~5,960</strong></td>
+<td><strong>Digital + DIY</strong></td>
+</tr>
+<tr class="highlight">
+<td><strong>FJELL LAND (full kit, coming soon)</strong></td>
+<td><strong>12.42m²</strong></td>
+<td><strong>~175,000</strong></td>
+<td><strong>~14,090</strong></td>
+<td><strong>Full kit</strong></td>
+</tr>
+</table>
+
+<p style="margin-top:20px;font-size:.88rem;color:var(--muted)">
+<strong>Key insight:</strong> Even at corrected full-kit pricing, FJELL is <strong>40-75% cheaper</strong> than comparable Norwegian products. The digital file model lets you build for ~74,000 NOK total — that's <strong>85% less</strong> than a traditional cabin.
+</p>
+</div>
+</section>
+
+<section id="tools">
+<div class="section-inner">
+<div class="section-label">Included Free</div>
+<h2 class="section-title">Interactive browser tools</h2>
+<p class="section-desc">Every package includes tools that work offline. No install, no subscription, no internet needed.</p>
+<div class="tools-grid">
+<div class="tool-card">
+<div class="tool-icon">📊</div>
+<h3>Material Cost Calculator</h3>
+<p>Select your cabin, market (NO/LT/EU), and connector method. Adjust prices with sliders. See totals update in real time with VAT included.</p>
+<div class="tool-tags">
+<span class="tool-tag">Works Offline</span>
+<span class="tool-tag">3 Markets</span>
+<span class="tool-tag">Real-time</span>
+</div>
+</div>
+<div class="tool-card">
+<div class="tool-icon">📅</div>
+<h3>Maintenance Calendar</h3>
+<p>Seasonal checklists with progress tracking. Check off tasks, save your progress locally, print for on-site use. Covers all 4 seasons.</p>
+<div class="tool-tags">
+<span class="tool-tag">Auto-Save</span>
+<span class="tool-tag">Printable</span>
+<span class="tool-tag">4 Seasons</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="specs">
+<div class="section-inner">
+<div class="section-label">Technical</div>
+<h2 class="section-title">Engineered for Nordic climates</h2>
+<p class="section-desc">Every specification verified. Every connection tested. Built to last decades, not seasons.</p>
+
+<table class="comparison-table">
+<tr>
+<th>Parameter</th>
+<th>Specification</th>
+</tr>
+<tr>
+<td><strong>Structural system</strong></td>
+<td>Steico ST200 LVL I-joists (45×200mm, ETA-06/0238)</td>
+</tr>
+<tr>
+<td><strong>Corner connectors</strong></td>
+<td>Corner Spine™ — 60×60mm hollow 6061-T6 aluminium, 3mm wall</td>
+</tr>
+<tr>
+<td><strong>Foundation</strong></td>
+<td>4× M30 galvanised screw jacks, ±200mm adjustment, 20kN each</td>
+</tr>
+<tr>
+<td><strong>Wall insulation</strong></td>
+<td>U = 0.16 W/m²K (TEK17 ≤ 0.18 ✓)</td>
+</tr>
+<tr>
+<td><strong>Roof insulation</strong></td>
+<td>U = 0.12 W/m²K (TEK17 ≤ 0.13 ✓)</td>
+</tr>
+<tr>
+<td><strong>Roof waterproofing</strong></td>
+<td>SBS modified bitumen 3mm + Sikaflex-11FC+ + aluminium perimeter bar</td>
+</tr>
+<tr>
+<td><strong>Temperature rating</strong></td>
+<td>-40°C to +80°C tested</td>
+</tr>
+<tr>
+<td><strong>Wall height</strong></td>
+<td>2,700mm clear interior</td>
+</tr>
+<tr>
+<td><strong>Build time</strong></td>
+<td>52 hours, 2-4 people (one weekend)</td>
+</tr>
+<tr>
+<td><strong>Warranty</strong></td>
+<td>10 years structural, 5 years weatherproof</td>
+</tr>
+</table>
+</div>
+</section>
+
+<section id="faq">
+<div class="section-inner">
+<div class="section-label">Questions</div>
+<h2 class="section-title">Frequently asked</h2>
+<div class="faq-list">
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What exactly do I receive when I purchase?</div>
+<div class="faq-a">Digital files only — 40 DXF files for CNC aluminium cutting, 6 STL files for 3D printing reference, plus assembly documentation. You manufacture the connectors yourself at any aluminium fabricator and purchase materials locally. No physical materials are shipped.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do I need a building permit in Norway?</div>
+<div class="faq-a">No. All FJELL packages are ≤15m² BYA (bebygd areal), which exempts them from building permit requirements under the Norwegian Planning and Building Act (PBL) §20-4. For other countries, check local regulations — most EU countries have similar exemptions for structures under 15-30m².</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How long does it take to build?</div>
+<div class="faq-a">Approximately 52 hours of assembly time with 2-4 people — typically one weekend. This assumes you have CNC-cut connectors ready and materials sourced. If you're manufacturing connectors yourself, add time for CNC fabrication.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the total cost including materials?</div>
+<div class="faq-a">Digital files start at 2,500 NOK. Materials cost approximately 70,000-74,000 NOK total for a self-build (LAND package), depending on your market and choices. That's roughly 85% less than a traditional cabin of similar quality. Full pre-cut kits coming Q2 2026.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I use this for an Airbnb or rental?</div>
+<div class="faq-a">Absolutely. Many customers use FJELL cabins as rental properties. The compact footprint and Norwegian design are strong selling points. The included material calculator helps you estimate ROI.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you offer assembly services?</div>
+<div class="faq-a">Assembly services are available in Norway only (coming Q2 2026). Turnkey pricing (materials + assembly) starts from ~250,000 NOK for LAND. Contact us for details and availability in your area.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What software do I need to open the DXF files?</div>
+<div class="faq-a">DXF files can be opened in LibreCAD (free), AutoCAD, FreeCAD, or any CAD software that supports the DXF format. You can send them directly to any aluminium CNC fabricator. STL files can be opened in any 3D printing slicer software.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does FJELL compare to Norske Mikrohus or Modulbygg?</div>
+<div class="faq-a">FJELL is fundamentally different — you buy digital files, not a physical cabin. This means 85% cost savings. Even our upcoming full kits will be 40-75% cheaper than competitors because of our optimized connector system and efficient material usage. You trade some convenience for massive savings.</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<div class="cta-section">
+<h2>Ready to build your cabin?</h2>
+<p>Get professional DXF & STL files. Manufacture connectors locally. Build in a weekend. Or let us build it for you (Norway, Q2 2026).</p>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20Order%20Inquiry" class="btn">Contact Us →</a>
+</div>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-brand">
+<div class="logo">FJELL™</div>
+<p>Modular micro-cabin system engineered in Norway. Digital files for CNC manufacturing. Build anywhere, live anywhere.</p>
+</div>
+<div class="footer-col">
+<h4>Products</h4>
+<a href="#cabins">LAND — Fixed</a>
+<a href="#cabins">CAMP — Transportable</a>
+<a href="#cabins">FORM — Custom</a>
+<a href="#cabins">ROAM — Mobile</a>
+<a href="#pricing">Digital Files</a>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<a href="mailto:pagalysm@gmail.com">pagalysm@gmail.com</a>
+<a href="tel:+4747749934">+47 477 49 934</a>
+<a href="#">Gumroad Store</a>
+<a href="#">GitHub (mantzu132)</a>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="eco">🌿 1 tree planted per cabin · Carbon-neutral production</div>
+<div>© 2026 FJELL Design · Mantas Pagalys · Tynset, Norway</div>
+</div>
+</footer>
+
+</body>
+</html>
