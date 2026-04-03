@@ -7,28 +7,36 @@
 <meta name="description" content="Professional DXF & STL files for modular cabins under 15m². No building permit needed in Norway.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#000;--bg2:#0a0a0a;--bg3:#111;
---t:#fff;--t2:#666;--t3:#333;
+--bg:#000;--bg2:#0a0a0a;--bg3:#111;--bg4:#1a1a1a;
+--t:#fff;--t2:#888;--t3:#444;--t4:#222;
 --blue:#0066ff;--red:#ff0033;
 --mono:'Space Mono',monospace;--sans:'Inter',system-ui,sans-serif;
+--tech:'IBM Plex Mono',monospace;
 }
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;font-size:16px;scroll-snap-type:y mandatory}
 body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:var(--blue);text-decoration:none;transition:all .2s}
 a:hover{color:#fff}
 img{max-width:100%;display:block}
 
 /* ACCENT LINES */
-.accent-line{position:fixed;z-index:9999;pointer-events:none}
-.accent-line.top{top:0;left:0;right:0;height:1px;background:var(--blue)}
-.accent-line.left{top:0;bottom:0;left:0;width:1px;background:var(--red)}
+.al{position:fixed;z-index:9999;pointer-events:none}
+.al-t{top:0;left:0;right:0;height:1px;background:var(--blue)}
+.al-l{top:0;bottom:0;left:0;width:1px;background:var(--red)}
+
+/* SIDE NAV - listable sections */
+.side-nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:1000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.side-nav a{font-family:var(--mono);font-size:.45rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);transition:all .2s;padding:4px 0}
+.side-nav a:hover,.side-nav a.active{color:var(--blue)}
+.side-nav a::after{content:'';display:block;width:1px;height:20px;background:var(--t3);margin-top:4px;transition:all .2s}
+.side-nav a:hover::after,.side-nav a.active::after{background:var(--blue);height:30px}
 
 /* NAV */
-nav{position:fixed;top:0;left:1px;right:0;z-index:100;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);padding:0 24px}
+nav{position:fixed;top:0;left:1px;right:0;z-index:100;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);padding:0 24px}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px}
 .nav-logo{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.2em;color:var(--t)}
 .nav-logo span{color:var(--t3);font-weight:400;margin-left:8px;letter-spacing:.04em;font-size:.6rem}
@@ -44,19 +52,26 @@ nav{position:fixed;top:0;left:1px;right:0;z-index:100;background:rgba(0,0,0,.92)
 .nav-mobile{display:none;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--t)}
 
 /* HERO */
-.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:0 24px 60px;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:0 24px 80px;overflow:hidden;scroll-snap-align:start}
 .hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.4}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.9) 100%)}
-.hero-inner{position:relative;z-index:1;max-width:1200px;width:100%;margin:0 auto;padding-top:120px}
-.hero-label{font-family:var(--mono);font-size:.55rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(15%) contrast(1.05)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.7) 60%,rgba(0,0,0,.95) 100%)}
+/* Grid overlay */
+.hero-bg::before{content:'';position:absolute;inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+background-size:60px 60px;z-index:1}
+.hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;margin:0 auto;padding-top:140px}
+.hero-label{font-family:var(--mono);font-size:.55rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
 .hero-label::before{content:'';width:12px;height:1px;background:var(--blue)}
-.hero h1{font-size:clamp(2.2rem,6vw,5rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin-bottom:20px;max-width:600px}
-.hero h1 em{font-style:normal;color:var(--red)}
-.hero p{font-size:.85rem;color:var(--t2);max-width:440px;margin-bottom:24px;line-height:1.7}
-.hero-stats{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:24px}
+.hero h1{font-family:var(--tech);font-size:clamp(2rem,5.5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:.02em;margin-bottom:20px;max-width:700px;color:#fff}
+.hero h1 em{font-style:normal;color:#fff}
+.hero h1 .thin{font-weight:300}
+.hero p{font-size:.85rem;color:rgba(255,255,255,.7);max-width:440px;margin-bottom:28px;line-height:1.7}
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:28px}
 .hero-stat{font-family:var(--mono);font-size:.55rem;color:var(--t3);letter-spacing:.05em}
-.hero-stat strong{display:block;font-size:1.3rem;font-weight:700;color:var(--t);margin-bottom:2px;letter-spacing:-.02em}
+.hero-stat strong{display:block;font-family:var(--tech);font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:2px;letter-spacing:.02em}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
 .btn{font-family:var(--mono);font-size:.55rem;font-weight:700;padding:10px 24px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;display:inline-flex;align-items:center;gap:6px}
 .btn-blue{background:var(--blue);color:#fff}
@@ -64,33 +79,39 @@ nav{position:fixed;top:0;left:1px;right:0;z-index:100;background:rgba(0,0,0,.92)
 .btn-ghost{background:transparent;border:1px solid var(--t3);color:var(--t)}
 .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
 
+/* WINNING FEATURE - Live Build Counter */
+.live-counter{position:absolute;bottom:40px;right:40px;z-index:2;font-family:var(--mono);padding:16px 20px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-left:1px solid var(--blue)}
+.live-counter .lc-label{font-size:.45rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
+.live-counter .lc-num{font-family:var(--tech);font-size:1.6rem;font-weight:400;color:var(--blue);letter-spacing:.05em}
+.live-counter .lc-sub{font-size:.5rem;color:var(--t3);margin-top:2px}
+
 /* STATS BAR */
-.stats{border-top:1px solid var(--t3);border-bottom:1px solid var(--t3)}
+.stats{border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
 .stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
 .stat{padding:24px;border-right:1px solid var(--t3)}
 .stat:last-child{border-right:none}
-.stat-n{font-family:var(--mono);font-size:1.4rem;font-weight:700;color:var(--t);letter-spacing:-.02em}
+.stat-n{font-family:var(--tech);font-size:1.4rem;font-weight:400;color:var(--t);letter-spacing:.02em}
 .stat-l{font-family:var(--mono);font-size:.5rem;color:var(--t3);margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
 
 /* SECTIONS */
-section{padding:80px 24px}
+section{padding:80px 24px;scroll-snap-align:start}
 .si{max-width:1200px;margin:0 auto}
 .sl{font-family:var(--mono);font-size:.5rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .sl::before{content:'';width:10px;height:1px;background:var(--red)}
-.st{font-size:clamp(1.5rem,3vw,2.4rem);font-weight:800;margin-bottom:10px;letter-spacing:-.02em;line-height:1.05}
+.st{font-family:var(--tech);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;margin-bottom:10px;letter-spacing:.02em;line-height:1.1}
 .sd{color:var(--t2);max-width:480px;font-size:.85rem;line-height:1.7}
 
 /* CABINS */
 .cg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--t3);margin-top:40px}
 .cc{background:var(--bg);position:relative;overflow:hidden}
 .cc:hover{background:var(--bg2)}
-.ci{height:280px;overflow:hidden;position:relative}
-.ci img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:grayscale(25%)}
+.ci{height:300px;overflow:hidden;position:relative}
+.ci img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:grayscale(20%)}
 .cc:hover .ci img{transform:scale(1.03);filter:grayscale(0%)}
 .ci::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%)}
 .ct{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.5rem;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;letter-spacing:.08em;text-transform:uppercase;z-index:1}
 .cb{padding:24px}
-.cb h3{font-size:.9rem;font-weight:700;letter-spacing:.05em;margin-bottom:3px}
+.cb h3{font-family:var(--tech);font-size:.9rem;font-weight:500;letter-spacing:.06em;margin-bottom:3px}
 .cb .cs{font-family:var(--mono);font-size:.55rem;color:var(--t3);margin-bottom:16px;letter-spacing:.03em}
 .csp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--t3);margin-bottom:16px}
 .csp-i{background:var(--bg);padding:8px 12px}
@@ -112,24 +133,24 @@ section{padding:80px 24px}
 .g1{grid-column:span 7}.g2{grid-column:span 5}.g3{grid-column:span 4}.g4{grid-column:span 4}.g5{grid-column:span 4}.g6{grid-column:span 6}.g7{grid-column:span 6}
 
 /* CUBE */
-.cube{padding:60px 24px;border-top:1px solid var(--t3);border-bottom:1px solid var(--t3)}
+.cube{padding:60px 24px;border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
 .cube-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .cube-img{background:#fff;padding:32px;display:flex;align-items:center;justify-content:center}
 .cube-img img{max-width:100%}
-.cube-info h3{font-size:1.3rem;font-weight:800;margin-bottom:12px;letter-spacing:-.02em}
+.cube-info h3{font-family:var(--tech);font-size:1.3rem;font-weight:400;margin-bottom:12px;letter-spacing:.02em}
 .cube-info p{color:var(--t2);font-size:.82rem;line-height:1.7;margin-bottom:16px}
 .cube-specs{font-family:var(--mono);font-size:.6rem;color:var(--t3);line-height:2}
 .cube-specs span{color:var(--blue);font-weight:700}
 
 /* PRICING */
-.pricing{background:var(--bg2);border-top:1px solid var(--t3);border-bottom:1px solid var(--t3)}
+.pricing{background:var(--bg2);border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
 .pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--t3);margin-top:40px}
 .pc{background:var(--bg);padding:36px 28px;position:relative}
 .pc:hover{background:var(--bg2)}
 .pc.feat{background:var(--bg3)}
 .pc.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--blue)}
 .pt{font-family:var(--mono);font-size:.5rem;font-weight:700;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
-.pp{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:3px}
+.pp{font-family:var(--tech);font-size:2rem;font-weight:400;letter-spacing:.02em;margin-bottom:3px}
 .pp span{font-size:.7rem;font-weight:400;color:var(--t3);font-family:var(--mono)}
 .pd{font-size:.75rem;color:var(--t2);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--t3);line-height:1.7}
 .pf{list-style:none;margin-bottom:28px}
@@ -144,7 +165,7 @@ section{padding:80px 24px}
 /* COMING SOON */
 .cs-box{margin-top:40px;padding:32px;position:relative}
 .cs-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.cs-box h3{font-size:.9rem;font-weight:700;margin-bottom:4px}
+.cs-box h3{font-family:var(--tech);font-size:.9rem;font-weight:400;margin-bottom:4px;letter-spacing:.02em}
 .cs-box h3 span{font-family:var(--mono);font-size:.5rem;font-weight:400;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-left:8px}
 .cs-box p{color:var(--t2);font-size:.78rem;margin-bottom:20px;line-height:1.7}
 .ptbl{width:100%;border-collapse:collapse}
@@ -165,7 +186,7 @@ section{padding:80px 24px}
 .tc{background:var(--bg);padding:36px;transition:background .3s}
 .tc:hover{background:var(--bg2)}
 .tc .ti{font-family:var(--mono);font-size:.5rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-.tc h3{font-size:.9rem;font-weight:700;margin-bottom:8px;letter-spacing:.02em}
+.tc h3{font-family:var(--tech);font-size:.9rem;font-weight:400;margin-bottom:8px;letter-spacing:.02em}
 .tc p{font-size:.78rem;color:var(--t2);margin-bottom:16px;line-height:1.7}
 .tt{display:flex;gap:6px;flex-wrap:wrap}
 .tt span{font-family:var(--mono);font-size:.45rem;color:var(--blue);border:1px solid rgba(0,102,255,.15);padding:2px 6px;letter-spacing:.05em}
@@ -190,9 +211,9 @@ section{padding:80px 24px}
 .faq-i.open .faq-a{max-height:300px;padding-bottom:16px}
 
 /* CTA */
-.cta{text-align:center;padding:60px 24px;position:relative}
+.cta{text-align:center;padding:60px 24px;position:relative;scroll-snap-align:start}
 .cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--blue)}
-.cta h2{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:10px;letter-spacing:-.02em}
+.cta h2{font-family:var(--tech);font-size:clamp(1.4rem,3vw,2rem);font-weight:400;margin-bottom:10px;letter-spacing:.02em}
 .cta p{color:var(--t2);margin-bottom:24px;font-size:.85rem;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7}
 .cta .btn{font-family:var(--mono);font-size:.6rem;font-weight:700;background:var(--blue);color:#fff;padding:12px 32px;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
 .cta .btn:hover{background:#fff;color:#000}
@@ -209,6 +230,7 @@ footer{border-top:1px solid var(--t3);padding:40px 24px 20px}
 
 /* MOBILE */
 @media(max-width:900px){
+.side-nav{display:none}
 .cg,.pg{grid-template-columns:1fr}
 .stats-inner{grid-template-columns:repeat(2,1fr)}
 .stat:nth-child(2){border-right:none}
@@ -217,12 +239,13 @@ footer{border-top:1px solid var(--t3);padding:40px 24px 20px}
 .fi{grid-template-columns:1fr;gap:24px}
 .gg{grid-template-columns:1fr 1fr;grid-auto-rows:180px}
 .g1,.g2,.g3,.g4,.g5,.g6,.g7{grid-column:span 1}
+.live-counter{bottom:20px;right:20px;padding:12px 16px}
 }
 @media(max-width:768px){
 nav{padding:0 16px}
 section{padding:60px 16px}
-.hero{padding:0 16px 40px;min-height:90vh}
-.hero h1{font-size:2rem}
+.hero{padding:0 16px 60px;min-height:90vh}
+.hero h1{font-size:1.8rem}
 .hero-stats{gap:16px}
 .stats-inner{grid-template-columns:1fr 1fr}
 .stat{padding:16px}
@@ -236,8 +259,18 @@ section{padding:60px 16px}
 </head>
 <body>
 
-<div class="accent-line top"></div>
-<div class="accent-line left"></div>
+<div class="al al-t"></div>
+<div class="al al-l"></div>
+
+<!-- SIDE NAV - listable sections -->
+<nav class="side-nav">
+<a href="#hero">TOP</a>
+<a href="#cabins">CABINS</a>
+<a href="#gallery">GALLERY</a>
+<a href="#pricing">PRICING</a>
+<a href="#specs">SPECS</a>
+<a href="#faq">FAQ</a>
+</nav>
 
 <nav>
 <div class="nav-inner">
@@ -261,9 +294,9 @@ section{padding:60px 16px}
 </div>
 </nav>
 
-<section class="hero">
+<section class="hero" id="hero">
 <div class="hero-bg">
-<img src="images/hero-apr4.png" alt="FJELL cabin">
+<img src="images/hero.png" alt="FJELL cabin">
 </div>
 <div class="hero-inner">
 <div class="hero-label" data-en="Norwegian Design · No Building Permit · Under 15m²" data-no="Norsk Design · Ingen Byggetillatelse · Under 15m²" data-lt="Norvegiškas Dizainas · Be Leidimo · Iki 15m²">Norwegian Design · No Building Permit · Under 15m²</div>
@@ -279,6 +312,13 @@ section{padding:60px 16px}
 <a href="#pricing" class="btn btn-blue" data-en="View Pricing →" data-no="Se Priser →" data-lt="Žiūrėti Kainas →">View Pricing →</a>
 <a href="#cabins" class="btn btn-ghost" data-en="4 Packages ↓" data-no="4 Pakker ↓" data-lt="4 Paketai ↓">4 Packages ↓</a>
 </div>
+</div>
+
+<!-- WINNING FEATURE: Live Build Counter -->
+<div class="live-counter">
+<div class="lc-label" data-en="Estimated savings vs traditional" data-no="Anslått besparelse vs tradisjonell" data-lt="Apskaičiuotos santaupos vs tradicinis">Estimated savings vs traditional</div>
+<div class="lc-num">~€118,000</div>
+<div class="lc-sub" data-en="per cabin built from files" data-no="per hytte bygget fra filer" data-lt="už namelį pastatytą iš failų">per cabin built from files</div>
 </div>
 </section>
 
@@ -299,7 +339,7 @@ section{padding:60px 16px}
 <div class="cg">
 
 <div class="cc">
-<div class="ci"><img src="images/exterior-hero.png" alt="FJELL LAND"><span class="ct" data-en="Most Popular" data-no="Mest Populær" data-lt="Populiariausias">Most Popular</span></div>
+<div class="ci"><img src="images/charcoal_land.png" alt="FJELL LAND"><span class="ct" data-en="Most Popular" data-no="Mest Populær" data-lt="Populiariausias">Most Popular</span></div>
 <div class="cb">
 <h3>LAND</h3>
 <div class="cs">12.42m² · <span data-en="Fixed foundation" data-no="Fast fundament" data-lt="Tvirtas pamatas">Fixed foundation</span></div>
@@ -598,6 +638,20 @@ if(t)el.innerHTML=t;
 });
 document.documentElement.lang=lang;
 }
+// Side nav active state
+const sections=document.querySelectorAll('section[id],.hero,.cube,.cta');
+const sideLinks=document.querySelectorAll('.side-nav a');
+window.addEventListener('scroll',()=>{
+let current='';
+sections.forEach(s=>{
+const top=s.offsetTop-200;
+if(window.scrollY>=top)current=s.getAttribute('id')||'hero';
+});
+sideLinks.forEach(a=>{
+a.classList.remove('active');
+if(a.getAttribute('href')==='#'+current)a.classList.add('active');
+});
+});
 </script>
 
 </body>
