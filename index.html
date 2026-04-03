@@ -7,339 +7,292 @@
 <meta name="description" content="Professional DXF & STL files for modular cabins under 15m². No building permit needed in Norway.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
---bg:#000;--bg2:#0a0a0a;--bg3:#111;--bg4:#1a1a1a;
---t:#fff;--t2:#888;--t3:#444;--t4:#222;
---blue:#0066ff;--red:#ff0033;
+--bg:#000;--t:#fff;--t2:#999;--t3:#555;
+--blue:#0066ff;--red:#ff0033;--yellow:#c8b560;
 --mono:'Space Mono',monospace;--sans:'Inter',system-ui,sans-serif;
---tech:'IBM Plex Mono',monospace;
+--tech:'IBM Plex Mono',monospace;--serif:'Playfair Display',Georgia,serif;
 }
-html{scroll-behavior:smooth;font-size:16px;scroll-snap-type:y mandatory}
-body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--blue);text-decoration:none;transition:all .2s}
 a:hover{color:#fff}
 img{max-width:100%;display:block}
 
 /* ACCENT LINES */
-.al{position:fixed;z-index:9999;pointer-events:none}
-.al-t{top:0;left:0;right:0;height:1px;background:var(--blue)}
-.al-l{top:0;bottom:0;left:0;width:1px;background:var(--red)}
+.al-t{position:fixed;top:0;left:0;right:0;height:1px;background:var(--blue);z-index:9999}
+.al-l{position:fixed;top:0;bottom:0;left:0;width:1px;background:var(--red);z-index:9999}
 
-/* SIDE NAV - listable sections */
-.side-nav{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:1000;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
-.side-nav a{font-family:var(--mono);font-size:.45rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);transition:all .2s;padding:4px 0}
-.side-nav a:hover,.side-nav a.active{color:var(--blue)}
-.side-nav a::after{content:'';display:block;width:1px;height:20px;background:var(--t3);margin-top:4px;transition:all .2s}
-.side-nav a:hover::after,.side-nav a.active::after{background:var(--blue);height:30px}
+/* HORIZONTAL SCROLL CONTAINER */
+.h-scroll{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;height:100vh;width:100vw}
+.h-scroll::-webkit-scrollbar{height:2px}
+.h-scroll::-webkit-scrollbar-track{background:var(--bg)}
+.h-scroll::-webkit-scrollbar-thumb{background:var(--t3)}
+.h-scroll::-webkit-scrollbar-thumb:hover{background:var(--t2)}
+
+/* PAGE */
+.page{min-width:100vw;height:100vh;scroll-snap-align:start;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.page-bg{position:absolute;inset:0;z-index:0}
+.page-bg img{width:100%;height:100%;object-fit:cover}
+.page-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.4) 50%,rgba(0,0,0,.8) 100%)}
+
+/* PAGE CONTENT */
+.page-content{position:relative;z-index:2;max-width:1200px;width:100%;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;height:100%}
 
 /* NAV */
-nav{position:fixed;top:0;left:1px;right:0;z-index:100;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);padding:0 24px}
-.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:48px}
-.nav-logo{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.2em;color:var(--t)}
-.nav-logo span{color:var(--t3);font-weight:400;margin-left:8px;letter-spacing:.04em;font-size:.6rem}
-.nav-links{display:flex;gap:24px;list-style:none;align-items:center}
-.nav-links a{font-family:var(--mono);font-size:.55rem;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+nav{position:fixed;top:0;left:1px;right:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(16px);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:44px}
+.nav-logo{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.2em;color:var(--t)}
+.nav-logo span{color:var(--t3);font-weight:400;margin-left:8px;letter-spacing:.04em;font-size:.55rem}
+.nav-links{display:flex;gap:20px;list-style:none;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:.5rem;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--blue)}
-.lang-switch{display:flex;gap:0;margin-left:16px}
-.lang-btn{font-family:var(--mono);font-size:.5rem;font-weight:700;color:var(--t3);background:transparent;border:none;padding:3px 6px;cursor:pointer;letter-spacing:.1em;transition:all .15s}
+.lang-switch{display:flex;gap:0;margin-left:12px}
+.lang-btn{font-family:var(--mono);font-size:.45rem;font-weight:700;color:var(--t3);background:transparent;border:none;padding:2px 5px;cursor:pointer;letter-spacing:.1em;transition:all .15s}
 .lang-btn:hover{color:var(--t)}
 .lang-btn.active{color:var(--red)}
-.nav-cta{font-family:var(--mono);font-size:.55rem;font-weight:700;background:var(--blue);color:#fff;padding:5px 12px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
+.nav-cta{font-family:var(--mono);font-size:.5rem;font-weight:700;background:var(--blue);color:#fff;padding:4px 10px;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
 .nav-cta:hover{background:var(--red)}
-.nav-mobile{display:none;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--t)}
+.nav-mobile{display:none;background:none;border:none;font-size:1rem;cursor:pointer;color:var(--t)}
 
-/* HERO */
-.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:0 24px 80px;overflow:hidden;scroll-snap-align:start}
-.hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.55;filter:grayscale(15%) contrast(1.05)}
-.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.7) 60%,rgba(0,0,0,.95) 100%)}
-/* Grid overlay */
-.hero-bg::before{content:'';position:absolute;inset:0;
-background-image:
-linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-background-size:60px 60px;z-index:1}
-.hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;margin:0 auto;padding-top:140px}
-.hero-label{font-family:var(--mono);font-size:.55rem;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
-.hero-label::before{content:'';width:12px;height:1px;background:var(--blue)}
-.hero h1{font-family:var(--tech);font-size:clamp(2rem,5.5vw,4.5rem);font-weight:300;line-height:1.05;letter-spacing:.02em;margin-bottom:20px;max-width:700px;color:#fff}
-.hero h1 em{font-style:normal;color:#fff}
-.hero h1 .thin{font-weight:300}
-.hero p{font-size:.85rem;color:rgba(255,255,255,.7);max-width:440px;margin-bottom:28px;line-height:1.7}
-.hero-stats{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:28px}
-.hero-stat{font-family:var(--mono);font-size:.55rem;color:var(--t3);letter-spacing:.05em}
-.hero-stat strong{display:block;font-family:var(--tech);font-size:1.4rem;font-weight:400;color:#fff;margin-bottom:2px;letter-spacing:.02em}
+/* PAGE INDICATOR */
+.page-indicator{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;gap:8px;align-items:center}
+.page-dot{width:6px;height:6px;border-radius:50%;background:var(--t3);transition:all .3s;cursor:pointer}
+.page-dot.active{background:var(--blue);width:20px;border-radius:3px}
+
+/* HERO TYPOGRAPHY */
+.hero-label{font-family:var(--mono);font-size:.5rem;color:var(--blue);letter-spacing:.2em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.hero-label::before{content:'';width:16px;height:1px;background:var(--blue)}
+.hero-title{font-family:var(--serif);font-size:clamp(2.5rem,5.5vw,5rem);font-weight:400;line-height:1.05;margin-bottom:24px;max-width:700px}
+.hero-title em{font-style:italic;color:var(--yellow)}
+.hero-title .accent{color:var(--blue)}
+.hero-sub{font-family:var(--tech);font-size:.8rem;color:rgba(255,255,255,.6);max-width:480px;margin-bottom:32px;line-height:1.8;font-weight:300}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:28px}
+.hero-stat{font-family:var(--mono);font-size:.5rem;color:var(--t3);letter-spacing:.05em}
+.hero-stat strong{display:block;font-family:var(--tech);font-size:1.3rem;font-weight:300;color:#fff;margin-bottom:2px;letter-spacing:.02em}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn{font-family:var(--mono);font-size:.55rem;font-weight:700;padding:10px 24px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;display:inline-flex;align-items:center;gap:6px}
+.btn{font-family:var(--mono);font-size:.5rem;font-weight:700;padding:10px 24px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;display:inline-flex;align-items:center;gap:6px}
 .btn-blue{background:var(--blue);color:#fff}
 .btn-blue:hover{background:#fff;color:#000}
-.btn-ghost{background:transparent;border:1px solid var(--t3);color:var(--t)}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--t)}
+.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow)}
 
-/* WINNING FEATURE - Live Build Counter */
-.live-counter{position:absolute;bottom:40px;right:40px;z-index:2;font-family:var(--mono);padding:16px 20px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);border-left:1px solid var(--blue)}
-.live-counter .lc-label{font-size:.45rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px}
-.live-counter .lc-num{font-family:var(--tech);font-size:1.6rem;font-weight:400;color:var(--blue);letter-spacing:.05em}
-.live-counter .lc-sub{font-size:.5rem;color:var(--t3);margin-top:2px}
+/* CAPTIONS - dirty yellow, not too small */
+.caption{font-family:var(--tech);font-size:.7rem;color:var(--yellow);letter-spacing:.06em;margin-top:12px;font-weight:300;opacity:.9}
+.caption::before{content:'— ';color:var(--t3)}
 
-/* STATS BAR */
-.stats{border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
-.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:24px;border-right:1px solid var(--t3)}
-.stat:last-child{border-right:none}
-.stat-n{font-family:var(--tech);font-size:1.4rem;font-weight:400;color:var(--t);letter-spacing:.02em}
-.stat-l{font-family:var(--mono);font-size:.5rem;color:var(--t3);margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
+/* SECTION LABELS */
+.sl{font-family:var(--mono);font-size:.5rem;color:var(--red);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sl::before{content:'';width:12px;height:1px;background:var(--red)}
+.st{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:400;margin-bottom:12px;letter-spacing:.01em;line-height:1.1}
+.sd{color:rgba(255,255,255,.6);max-width:480px;font-size:.85rem;line-height:1.7}
 
-/* SECTIONS */
-section{padding:80px 24px;scroll-snap-align:start}
-.si{max-width:1200px;margin:0 auto}
-.sl{font-family:var(--mono);font-size:.5rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.sl::before{content:'';width:10px;height:1px;background:var(--red)}
-.st{font-family:var(--tech);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;margin-bottom:10px;letter-spacing:.02em;line-height:1.1}
-.sd{color:var(--t2);max-width:480px;font-size:.85rem;line-height:1.7}
-
-/* CABINS */
-.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--t3);margin-top:40px}
-.cc{background:var(--bg);position:relative;overflow:hidden}
-.cc:hover{background:var(--bg2)}
-.ci{height:300px;overflow:hidden;position:relative}
+/* CABIN CARDS */
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.08);margin-top:32px}
+.cc{background:rgba(0,0,0,.6);backdrop-filter:blur(8px);position:relative;overflow:hidden}
+.cc:hover{background:rgba(0,0,0,.7)}
+.ci{height:220px;overflow:hidden;position:relative}
 .ci img{width:100%;height:100%;object-fit:cover;transition:transform .5s;filter:grayscale(20%)}
 .cc:hover .ci img{transform:scale(1.03);filter:grayscale(0%)}
-.ci::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%)}
-.ct{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:.5rem;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;letter-spacing:.08em;text-transform:uppercase;z-index:1}
-.cb{padding:24px}
-.cb h3{font-family:var(--tech);font-size:.9rem;font-weight:500;letter-spacing:.06em;margin-bottom:3px}
-.cb .cs{font-family:var(--mono);font-size:.55rem;color:var(--t3);margin-bottom:16px;letter-spacing:.03em}
-.csp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--t3);margin-bottom:16px}
-.csp-i{background:var(--bg);padding:8px 12px}
-.csp-i strong{display:block;font-family:var(--mono);font-size:.45rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
-.csp-i span{font-size:.72rem;font-weight:500}
-.cf{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--t3)}
-.cf .pr{font-family:var(--mono);font-size:.75rem;font-weight:700;color:var(--blue)}
-.cf .pr small{font-weight:400;color:var(--t3);font-size:.55rem}
-.cf .btn{font-family:var(--mono);font-size:.5rem;font-weight:700;padding:6px 14px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--t3);color:var(--t);cursor:pointer;transition:all .2s}
-.cf .btn:hover{border-color:var(--blue);color:var(--blue)}
+.ci::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.7) 100%)}
+.ct{position:absolute;top:10px;left:10px;font-family:var(--mono);font-size:.45rem;font-weight:700;background:var(--red);color:#fff;padding:2px 6px;letter-spacing:.08em;text-transform:uppercase;z-index:1}
+.cb{padding:20px}
+.cb h3{font-family:var(--tech);font-size:.85rem;font-weight:400;letter-spacing:.06em;margin-bottom:3px}
+.cb .cs{font-family:var(--mono);font-size:.5rem;color:var(--t3);margin-bottom:14px;letter-spacing:.03em}
+.csp{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-bottom:14px}
+.csp-i{background:rgba(0,0,0,.4);padding:6px 10px}
+.csp-i strong{display:block;font-family:var(--mono);font-size:.4rem;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px}
+.csp-i span{font-size:.68rem;font-weight:400;color:rgba(255,255,255,.8)}
+.cf{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.cf .pr{font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--blue)}
+.cf .pr small{font-weight:300;color:var(--t3);font-size:.5rem}
+.cf .btn{font-family:var(--mono);font-size:.45rem;font-weight:700;padding:5px 12px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid rgba(255,255,255,.15);color:var(--t);cursor:pointer;transition:all .2s}
+.cf .btn:hover{border-color:var(--yellow);color:var(--yellow)}
 
-/* GALLERY */
-.gg{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:240px;gap:1px;background:var(--t3);margin-top:40px}
-.gi{position:relative;overflow:hidden;background:var(--bg)}
-.gi img{width:100%;height:100%;object-fit:cover;transition:all .5s;filter:grayscale(30%)}
+/* GALLERY GRID */
+.gg{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:200px;gap:1px;background:rgba(255,255,255,.06);margin-top:32px}
+.gi{position:relative;overflow:hidden;background:rgba(0,0,0,.4)}
+.gi img{width:100%;height:100%;object-fit:cover;transition:all .5s;filter:grayscale(25%)}
 .gi:hover img{transform:scale(1.02);filter:grayscale(0%)}
-.gi .gc{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(transparent,rgba(0,0,0,.9));font-family:var(--mono);font-size:.5rem;color:var(--t2);letter-spacing:.03em;transform:translateY(100%);transition:transform .3s}
+.gi .gc{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-family:var(--tech);font-size:.65rem;color:var(--yellow);letter-spacing:.04em;font-weight:300;transform:translateY(100%);transition:transform .3s}
 .gi:hover .gc{transform:translateY(0)}
 .g1{grid-column:span 7}.g2{grid-column:span 5}.g3{grid-column:span 4}.g4{grid-column:span 4}.g5{grid-column:span 4}.g6{grid-column:span 6}.g7{grid-column:span 6}
 
-/* CUBE */
-.cube{padding:60px 24px;border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
-.cube-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.cube-img{background:#fff;padding:32px;display:flex;align-items:center;justify-content:center}
-.cube-img img{max-width:100%}
-.cube-info h3{font-family:var(--tech);font-size:1.3rem;font-weight:400;margin-bottom:12px;letter-spacing:.02em}
-.cube-info p{color:var(--t2);font-size:.82rem;line-height:1.7;margin-bottom:16px}
-.cube-specs{font-family:var(--mono);font-size:.6rem;color:var(--t3);line-height:2}
-.cube-specs span{color:var(--blue);font-weight:700}
-
 /* PRICING */
-.pricing{background:var(--bg2);border-top:1px solid var(--t3);border-bottom:1px solid var(--t3);scroll-snap-align:start}
-.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--t3);margin-top:40px}
-.pc{background:var(--bg);padding:36px 28px;position:relative}
-.pc:hover{background:var(--bg2)}
-.pc.feat{background:var(--bg3)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:32px}
+.pc{background:rgba(0,0,0,.6);backdrop-filter:blur(8px);padding:32px 24px;position:relative}
+.pc:hover{background:rgba(0,0,0,.7)}
+.pc.feat{background:rgba(0,0,0,.75)}
 .pc.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--blue)}
-.pt{font-family:var(--mono);font-size:.5rem;font-weight:700;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
-.pp{font-family:var(--tech);font-size:2rem;font-weight:400;letter-spacing:.02em;margin-bottom:3px}
-.pp span{font-size:.7rem;font-weight:400;color:var(--t3);font-family:var(--mono)}
-.pd{font-size:.75rem;color:var(--t2);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--t3);line-height:1.7}
-.pf{list-style:none;margin-bottom:28px}
-.pf li{padding:5px 0;font-size:.7rem;color:var(--t2);display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);letter-spacing:.02em}
+.pt{font-family:var(--mono);font-size:.45rem;font-weight:700;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.pp{font-family:var(--tech);font-size:1.8rem;font-weight:300;letter-spacing:.02em;margin-bottom:3px}
+.pp span{font-size:.65rem;font-weight:300;color:var(--t3);font-family:var(--mono)}
+.pd{font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06);line-height:1.7}
+.pf{list-style:none;margin-bottom:24px}
+.pf li{padding:4px 0;font-size:.65rem;color:rgba(255,255,255,.5);display:flex;align-items:flex-start;gap:6px;font-family:var(--mono);letter-spacing:.02em}
 .pf li::before{content:'→';color:var(--blue);font-weight:700;flex-shrink:0}
-.pc .btn{font-family:var(--mono);font-size:.5rem;font-weight:700;width:100%;padding:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-align:center;display:block}
-.bo{background:transparent;border:1px solid var(--t3);color:var(--t)}
+.pc .btn{font-family:var(--mono);font-size:.45rem;font-weight:700;width:100%;padding:8px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-align:center;display:block}
+.bo{background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--t)}
 .bo:hover{border-color:var(--blue);color:var(--blue)}
 .bf{background:var(--blue);border:1px solid var(--blue);color:#fff}
 .bf:hover{background:#fff;border-color:#fff;color:#000}
 
 /* COMING SOON */
-.cs-box{margin-top:40px;padding:32px;position:relative}
+.cs-box{margin-top:32px;padding:24px;position:relative;background:rgba(0,0,0,.3)}
 .cs-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.cs-box h3{font-family:var(--tech);font-size:.9rem;font-weight:400;margin-bottom:4px;letter-spacing:.02em}
-.cs-box h3 span{font-family:var(--mono);font-size:.5rem;font-weight:400;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-left:8px}
-.cs-box p{color:var(--t2);font-size:.78rem;margin-bottom:20px;line-height:1.7}
+.cs-box h3{font-family:var(--tech);font-size:.85rem;font-weight:300;margin-bottom:4px;letter-spacing:.02em}
+.cs-box h3 span{font-family:var(--mono);font-size:.45rem;font-weight:400;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-left:8px}
+.cs-box p{color:rgba(255,255,255,.5);font-size:.72rem;margin-bottom:16px;line-height:1.7}
 .ptbl{width:100%;border-collapse:collapse}
-.ptbl th{font-family:var(--mono);font-size:.5rem;font-weight:400;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:8px 12px;border-bottom:1px solid var(--t3)}
-.ptbl td{padding:10px 12px;font-size:.75rem;border-bottom:1px solid var(--t3)}
-.ptbl td:first-child{font-weight:600}
-.ptbl .pv{font-family:var(--mono);font-weight:700;color:var(--blue);font-size:.75rem}
+.ptbl th{font-family:var(--mono);font-size:.45rem;font-weight:300;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.ptbl td{padding:8px 10px;font-size:.7rem;border-bottom:1px solid rgba(255,255,255,.04)}
+.ptbl td:first-child{font-weight:500}
+.ptbl .pv{font-family:var(--mono);font-weight:600;color:var(--blue);font-size:.7rem}
 
 /* COMPARISON */
-.ctbl{width:100%;border-collapse:collapse;margin-top:40px}
-.ctbl th{font-family:var(--mono);font-size:.5rem;font-weight:400;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:10px 14px;border-bottom:1px solid var(--t3)}
-.ctbl td{padding:10px 14px;font-size:.75rem;border-bottom:1px solid var(--t3)}
+.ctbl{width:100%;border-collapse:collapse;margin-top:32px}
+.ctbl th{font-family:var(--mono);font-size:.45rem;font-weight:300;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.ctbl td{padding:8px 12px;font-size:.7rem;border-bottom:1px solid rgba(255,255,255,.04)}
 .ctbl .comp{color:var(--t3)}
-.ctbl .hl td{color:var(--blue);font-weight:600}
+.ctbl .hl td{color:var(--blue);font-weight:500}
 
 /* TOOLS */
-.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--t3);margin-top:40px}
-.tc{background:var(--bg);padding:36px;transition:background .3s}
-.tc:hover{background:var(--bg2)}
-.tc .ti{font-family:var(--mono);font-size:.5rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-.tc h3{font-family:var(--tech);font-size:.9rem;font-weight:400;margin-bottom:8px;letter-spacing:.02em}
-.tc p{font-size:.78rem;color:var(--t2);margin-bottom:16px;line-height:1.7}
-.tt{display:flex;gap:6px;flex-wrap:wrap}
-.tt span{font-family:var(--mono);font-size:.45rem;color:var(--blue);border:1px solid rgba(0,102,255,.15);padding:2px 6px;letter-spacing:.05em}
+.tg{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:32px}
+.tc{background:rgba(0,0,0,.5);backdrop-filter:blur(8px);padding:32px;transition:background .3s}
+.tc:hover{background:rgba(0,0,0,.65)}
+.tc .ti{font-family:var(--mono);font-size:.45rem;color:var(--red);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.tc h3{font-family:var(--tech);font-size:.85rem;font-weight:300;margin-bottom:6px;letter-spacing:.02em}
+.tc p{font-size:.72rem;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.7}
+.tt{display:flex;gap:5px;flex-wrap:wrap}
+.tt span{font-family:var(--mono);font-size:.4rem;color:var(--blue);border:1px solid rgba(0,102,255,.12);padding:2px 5px;letter-spacing:.05em}
 
 /* SPECS */
-.sw{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:40px}
-.sw img{width:100%;filter:grayscale(25%)}
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;margin-top:32px}
+.sw img{width:100%;filter:grayscale(20%);border:1px solid rgba(255,255,255,.06)}
 .slist{list-style:none}
-.slist li{padding:12px 0;border-bottom:1px solid var(--t3);display:flex;justify-content:space-between;font-size:.78rem}
+.slist li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;font-size:.75rem}
 .slist li:last-child{border-bottom:none}
-.slist li strong{font-family:var(--mono);font-size:.5rem;color:var(--t3);font-weight:400;letter-spacing:.05em;text-transform:uppercase;min-width:140px}
-.slist li span{font-weight:500;text-align:right}
+.slist li strong{font-family:var(--mono);font-size:.45rem;color:var(--t3);font-weight:300;letter-spacing:.05em;text-transform:uppercase;min-width:130px}
+.slist li span{font-weight:400;text-align:right;color:rgba(255,255,255,.7)}
 
 /* FAQ */
-.faq{max-width:700px;margin-top:40px}
-.faq-i{border-bottom:1px solid var(--t3)}
-.faq-q{padding:16px 0;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.85rem;transition:color .2s}
-.faq-q:hover{color:var(--blue)}
-.faq-q::after{content:'+';font-family:var(--mono);font-size:.9rem;color:var(--t3);transition:transform .2s;flex-shrink:0;margin-left:12px}
-.faq-i.open .faq-q::after{transform:rotate(45deg);color:var(--blue)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:.78rem;color:var(--t2);line-height:1.8}
-.faq-i.open .faq-a{max-height:300px;padding-bottom:16px}
+.faq{max-width:600px;margin-top:32px}
+.faq-i{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-q{padding:14px 0;font-weight:400;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;transition:color .2s;font-family:var(--tech);letter-spacing:.01em}
+.faq-q:hover{color:var(--yellow)}
+.faq-q::after{content:'+';font-family:var(--mono);font-size:.8rem;color:var(--t3);transition:transform .2s;flex-shrink:0;margin-left:10px}
+.faq-i.open .faq-q::after{transform:rotate(45deg);color:var(--yellow)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:.72rem;color:rgba(255,255,255,.5);line-height:1.8}
+.faq-i.open .faq-a{max-height:300px;padding-bottom:14px}
 
 /* CTA */
-.cta{text-align:center;padding:60px 24px;position:relative;scroll-snap-align:start}
-.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--blue)}
-.cta h2{font-family:var(--tech);font-size:clamp(1.4rem,3vw,2rem);font-weight:400;margin-bottom:10px;letter-spacing:.02em}
-.cta p{color:var(--t2);margin-bottom:24px;font-size:.85rem;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7}
-.cta .btn{font-family:var(--mono);font-size:.6rem;font-weight:700;background:var(--blue);color:#fff;padding:12px 32px;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
+.cta{text-align:center}
+.cta h2{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:400;margin-bottom:10px;letter-spacing:.01em}
+.cta p{color:rgba(255,255,255,.5);margin-bottom:24px;font-size:.82rem;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7}
+.cta .btn{font-family:var(--mono);font-size:.55rem;font-weight:700;background:var(--blue);color:#fff;padding:12px 32px;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;transition:all .2s}
 .cta .btn:hover{background:#fff;color:#000}
 
 /* FOOTER */
-footer{border-top:1px solid var(--t3);padding:40px 24px 20px}
-.fi{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
-.fb .logo{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.2em;margin-bottom:8px}
-.fb p{font-size:.72rem;color:var(--t3);line-height:1.7;max-width:260px}
-.fc h4{font-family:var(--mono);font-size:.5rem;font-weight:700;color:var(--t2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
-.fc a{display:block;font-size:.72rem;color:var(--t3);padding:2px 0;transition:color .2s}
+footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;background:rgba(0,0,0,.9)}
+.fi{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+.fb .logo{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.2em;margin-bottom:6px}
+.fb p{font-size:.68rem;color:var(--t3);line-height:1.7;max-width:240px}
+.fc h4{font-family:var(--mono);font-size:.45rem;font-weight:700;color:var(--t2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
+.fc a{display:block;font-size:.68rem;color:var(--t3);padding:2px 0;transition:color .2s}
 .fc a:hover{color:var(--blue)}
-.fbot{max-width:1200px;margin:24px auto 0;padding-top:16px;border-top:1px solid var(--t3);display:flex;justify-content:space-between;align-items:center;font-size:.5rem;color:var(--t3);font-family:var(--mono);letter-spacing:.05em}
+.fbot{max-width:1200px;margin:20px auto 0;padding-top:12px;border-top:1px solid rgba(255,255,255,.04);display:flex;justify-content:space-between;align-items:center;font-size:.45rem;color:var(--t3);font-family:var(--mono);letter-spacing:.05em}
 
 /* MOBILE */
 @media(max-width:900px){
-.side-nav{display:none}
+.h-scroll{flex-direction:column;overflow-x:hidden;overflow-y:auto;scroll-snap-type:y mandatory}
+.page{min-width:100vw;min-height:100vh;height:auto}
+.page-content{padding:80px 24px 60px}
 .cg,.pg{grid-template-columns:1fr}
-.stats-inner{grid-template-columns:repeat(2,1fr)}
-.stat:nth-child(2){border-right:none}
 .tg{grid-template-columns:1fr}
-.sw,.cube-inner{grid-template-columns:1fr}
-.fi{grid-template-columns:1fr;gap:24px}
-.gg{grid-template-columns:1fr 1fr;grid-auto-rows:180px}
+.sw{grid-template-columns:1fr}
+.fi{grid-template-columns:1fr;gap:20px}
+.gg{grid-template-columns:1fr 1fr;grid-auto-rows:160px}
 .g1,.g2,.g3,.g4,.g5,.g6,.g7{grid-column:span 1}
-.live-counter{bottom:20px;right:20px;padding:12px 16px}
-}
-@media(max-width:768px){
-nav{padding:0 16px}
-section{padding:60px 16px}
-.hero{padding:0 16px 60px;min-height:90vh}
-.hero h1{font-size:1.8rem}
-.hero-stats{gap:16px}
-.stats-inner{grid-template-columns:1fr 1fr}
-.stat{padding:16px}
-.cta{padding:40px 16px}
-.fbot{flex-direction:column;gap:8px;text-align:center}
+.page-indicator{display:none}
 .nav-links{display:none}
 .nav-mobile{display:block}
-.gg{grid-template-columns:1fr;grid-auto-rows:200px}
+}
+@media(max-width:768px){
+.hero-title{font-size:2rem}
+.hero-stats{gap:16px}
+.fbot{flex-direction:column;gap:6px;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="al al-t"></div>
-<div class="al al-l"></div>
-
-<!-- SIDE NAV - listable sections -->
-<nav class="side-nav">
-<a href="#hero">TOP</a>
-<a href="#cabins">CABINS</a>
-<a href="#gallery">GALLERY</a>
-<a href="#pricing">PRICING</a>
-<a href="#specs">SPECS</a>
-<a href="#faq">FAQ</a>
-</nav>
+<div class="al-t"></div>
+<div class="al-l"></div>
 
 <nav>
 <div class="nav-inner">
 <div class="nav-logo">FJELL <span>MODULAR MICRO-CABINS</span></div>
 <ul class="nav-links">
-<li><a href="#cabins" data-en="Cabins" data-no="Hytter" data-lt="Namai">Cabins</a></li>
-<li><a href="#gallery" data-en="Gallery" data-no="Galleri" data-lt="Galerija">Gallery</a></li>
-<li><a href="#pricing" data-en="Pricing" data-no="Priser" data-lt="Kainos">Pricing</a></li>
-<li><a href="#specs" data-en="Specs" data-no="Spesifikasjoner" data-lt="Specifikacijos">Specs</a></li>
-<li><a href="#faq" data-en="FAQ" data-no="FAQ" data-lt="DUK">FAQ</a></li>
+<li><a href="#p-hero">Home</a></li>
+<li><a href="#p-cabins">Cabins</a></li>
+<li><a href="#p-gallery">Gallery</a></li>
+<li><a href="#p-pricing">Pricing</a></li>
+<li><a href="#p-specs">Specs</a></li>
+<li><a href="#p-faq">FAQ</a></li>
 </ul>
-<div style="display:flex;align-items:center;gap:12px">
+<div style="display:flex;align-items:center;gap:10px">
 <div class="lang-switch">
 <button class="lang-btn active" onclick="setLang('en')">EN</button>
 <button class="lang-btn" onclick="setLang('no')">NO</button>
 <button class="lang-btn" onclick="setLang('lt')">LT</button>
 </div>
-<a href="#pricing" class="nav-cta" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
+<a href="#p-pricing" class="nav-cta" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
 </div>
 <button class="nav-mobile" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
 </div>
 </nav>
 
-<section class="hero" id="hero">
-<div class="hero-bg">
-<img src="images/hero.png" alt="FJELL cabin">
+<div class="h-scroll" id="hScroll">
+
+<!-- PAGE 1: HERO - Dramatic ocean waves -->
+<section class="page" id="p-hero">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1920&q=80" alt="Dramatic ocean waves" loading="eager">
 </div>
-<div class="hero-inner">
+<div class="page-content">
 <div class="hero-label" data-en="Norwegian Design · No Building Permit · Under 15m²" data-no="Norsk Design · Ingen Byggetillatelse · Under 15m²" data-lt="Norvegiškas Dizainas · Be Leidimo · Iki 15m²">Norwegian Design · No Building Permit · Under 15m²</div>
-<h1 data-en="Build a cabin.<br><em>From files.</em>" data-no="Bygg en hytte.<br><em>Fra filer.</em>" data-lt="Pastatyk namelį.<br><em>Iš failų.</em>">Build a cabin.<br><em>From files.</em></h1>
-<p data-en="40 DXF files + 6 STL files for modular cabins engineered for Nordic climates. Manufacture connectors yourself. Build in one weekend." data-no="40 DXF-filer + 6 STL-filer for modulære hytter konstruert for nordisk klima. Produser koblinger selv. Bygg på en helg." data-lt="40 DXF failų + 6 STL failai moduliniams nameliams šiauriniam klimatui. Gaminkite jungtis patys. Pastatykite per savaitgalį.">40 DXF files + 6 STL files for modular cabins engineered for Nordic climates. Manufacture connectors yourself. Build in one weekend.</p>
+<h1 class="hero-title" data-en="From blueprints<br>to <em>High Living.</em>" data-no="Fra tegninger<br>til <em>Høy Livskvalitet.</em>" data-lt="Nuo brėžinių<br>iki <em>Aukštos Gyvenimo Kokybės.</em>">From blueprints<br>to <em>High Living.</em></h1>
+<p class="hero-sub" data-en="40 precision DXF files + 6 STL files. Manufacture the connectors yourself. Source materials locally. Build a cabin that belongs to the landscape — in one weekend." data-no="40 presise DXF-filer + 6 STL-filer. Produser koblingene selv. Skaff materialer lokalt. Bygg en hytte som hører hjemme i landskapet — på en helg." data-lt="40 tikslių DXF failų + 6 STL failai. Gaminkite jungtis patys. Medžiagas rinkitės vietoje. Pastatykite namelį, kuris priklauso kraštovaizdžiui — per vieną savaitgalį.">40 precision DXF files + 6 STL files. Manufacture the connectors yourself. Source materials locally. Build a cabin that belongs to the landscape — in one weekend.</p>
 <div class="hero-stats">
-<div class="hero-stat"><strong>40</strong>DXF</div>
-<div class="hero-stat"><strong>6</strong>STL</div>
-<div class="hero-stat"><strong>52h</strong><span data-en="Build" data-no="Bygg" data-lt="Statyba">Build</span></div>
-<div class="hero-stat"><strong>≤15m²</strong><span data-en="No Permit" data-no="Ingen Tillatelse" data-lt="Be Leidimo">No Permit</span></div>
+<div class="hero-stat"><strong>40</strong>DXF Files</div>
+<div class="hero-stat"><strong>6</strong>STL Files</div>
+<div class="hero-stat"><strong>52h</strong>Build Time</div>
+<div class="hero-stat"><strong>≤15m²</strong>No Permit</div>
 </div>
 <div class="hero-actions">
-<a href="#pricing" class="btn btn-blue" data-en="View Pricing →" data-no="Se Priser →" data-lt="Žiūrėti Kainas →">View Pricing →</a>
-<a href="#cabins" class="btn btn-ghost" data-en="4 Packages ↓" data-no="4 Pakker ↓" data-lt="4 Paketai ↓">4 Packages ↓</a>
+<a href="#p-pricing" class="btn btn-blue" data-en="View Pricing →" data-no="Se Priser →" data-lt="Žiūrėti Kainas →">View Pricing →</a>
+<a href="#p-cabins" class="btn btn-ghost" data-en="4 Packages ↓" data-no="4 Pakker ↓" data-lt="4 Paketai ↓">4 Packages ↓</a>
 </div>
-</div>
-
-<!-- WINNING FEATURE: Live Build Counter -->
-<div class="live-counter">
-<div class="lc-label" data-en="Estimated savings vs traditional" data-no="Anslått besparelse vs tradisjonell" data-lt="Apskaičiuotos santaupos vs tradicinis">Estimated savings vs traditional</div>
-<div class="lc-num">~€118,000</div>
-<div class="lc-sub" data-en="per cabin built from files" data-no="per hytte bygget fra filer" data-lt="už namelį pastatytą iš failų">per cabin built from files</div>
+<div class="caption" data-en="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interior" data-no="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interiør" data-lt="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² vidus">FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interior</div>
 </div>
 </section>
 
-<div class="stats">
-<div class="stats-inner">
-<div class="stat"><div class="stat-n">12.42m²</div><div class="stat-l" data-en="LAND Interior" data-no="LAND Interiør" data-lt="LAND Vidus">LAND Interior</div></div>
-<div class="stat"><div class="stat-n">2,700mm</div><div class="stat-l" data-en="Clear Height" data-no="Fri Høyde" data-lt="Grynas Aukštis">Clear Height</div></div>
-<div class="stat"><div class="stat-n" style="color:var(--red)">U=0.16</div><div class="stat-l" data-en="Wall Insulation" data-no="Veggisolasjon" data-lt="Sienų Izoliacija">Wall Insulation</div></div>
-<div class="stat"><div class="stat-n">-40°C</div><div class="stat-l" data-en="Tested Range" data-no="Testet Område" data-lt="Testuotas Diapazonas">Tested Range</div></div>
+<!-- PAGE 2: CABINS - Cliff overlooking ocean -->
+<section class="page" id="p-cabins">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80" alt="Cliff overlooking ocean">
 </div>
-</div>
-
-<section id="cabins">
-<div class="si">
+<div class="page-content">
 <div class="sl" data-en="Four Packages" data-no="Fire Pakker" data-lt="Keturi Paketai">Four Packages</div>
 <h2 class="st" data-en="Choose your cabin" data-no="Velg din hytte" data-lt="Pasirinkite savo namelį">Choose your cabin</h2>
 <p class="sd" data-en="All under 15m² BYA. Designed for Norwegian weather. Fixed foundation to mobile." data-no="Alle under 15m² BYA. Designet for norsk vær. Fast fundament til mobil." data-lt="Visi iki 15m² BYA. Suprojektuoti norvegiškam orui. Nuo tvirto pamato iki mobiliojo.">All under 15m² BYA. Designed for Norwegian weather. Fixed foundation to mobile.</p>
 <div class="cg">
 
 <div class="cc">
-<div class="ci"><img src="images/charcoal_land.png" alt="FJELL LAND"><span class="ct" data-en="Most Popular" data-no="Mest Populær" data-lt="Populiariausias">Most Popular</span></div>
+<div class="ci"><img src="images/charcoal_land.png" alt="FJELL LAND" loading="lazy"><span class="ct" data-en="Most Popular" data-no="Mest Populær" data-lt="Populiariausias">Most Popular</span></div>
 <div class="cb">
 <h3>LAND</h3>
 <div class="cs">12.42m² · <span data-en="Fixed foundation" data-no="Fast fundament" data-lt="Tvirtas pamatas">Fixed foundation</span></div>
@@ -351,13 +304,13 @@ section{padding:60px 16px}
 </div>
 <div class="cf">
 <div class="pr">€250 <small>/ 2,500 NOK</small></div>
-<a href="#pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
+<a href="#p-pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
 </div>
 </div>
 </div>
 
 <div class="cc">
-<div class="ci"><img src="images/exterior-larch.jpg" alt="FJELL CAMP"></div>
+<div class="ci"><img src="images/exterior-larch.jpg" alt="FJELL CAMP" loading="lazy"></div>
 <div class="cb">
 <h3>CAMP</h3>
 <div class="cs">12.69m² · <span data-en="Trailer-transportable" data-no="Tilhengertransportabel" data-lt="Transportuojamas">Trailer-transportable</span></div>
@@ -369,13 +322,13 @@ section{padding:60px 16px}
 </div>
 <div class="cf">
 <div class="pr">€250 <small>/ 2,500 NOK</small></div>
-<a href="#pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
+<a href="#p-pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
 </div>
 </div>
 </div>
 
 <div class="cc">
-<div class="ci"><img src="images/parallel-windows.jpg" alt="FJELL FORM"></div>
+<div class="ci"><img src="images/parallel-windows.jpg" alt="FJELL FORM" loading="lazy"></div>
 <div class="cb">
 <h3>FORM</h3>
 <div class="cs">~12m² · <span data-en="Custom dimensions" data-no="Tilpassede mål" data-lt="Individualūs matmenys">Custom dimensions</span></div>
@@ -387,13 +340,13 @@ section{padding:60px 16px}
 </div>
 <div class="cf">
 <div class="pr">€250 <small>/ 2,500 NOK</small></div>
-<a href="#pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
+<a href="#p-pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
 </div>
 </div>
 </div>
 
 <div class="cc">
-<div class="ci"><img src="images/trailer-lifestyle.jpeg" alt="FJELL ROAM"></div>
+<div class="ci"><img src="images/trailer-lifestyle.jpeg" alt="FJELL ROAM" loading="lazy"></div>
 <div class="cb">
 <h3>ROAM</h3>
 <div class="cs">12.65m² · <span data-en="Permanent trailer chassis" data-no="Permanent tilhengerchassis" data-lt="Nuolatinis priekabos važiuoklė">Permanent trailer chassis</span></div>
@@ -405,35 +358,22 @@ section{padding:60px 16px}
 </div>
 <div class="cf">
 <div class="pr">€250 <small>/ 2,500 NOK</small></div>
-<a href="#pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
+<a href="#p-pricing" class="btn" data-en="Get Files" data-no="Få Filer" data-lt="Gauti Failus">Get Files</a>
 </div>
 </div>
 </div>
 
 </div>
+<div class="caption" data-en="From fixed foundation to permanent trailer — one file system" data-no="Fra fast fundament til permanent tilhenger — ett filsystem" data-lt="Nuo tvirto pamato iki nuolatinės priekabos — viena failų sistema">From fixed foundation to permanent trailer — one file system</div>
 </div>
 </section>
 
-<div class="cube">
-<div class="cube-inner">
-<div class="cube-img">
-<img src="images/Minimalist black micro-cabin design.png" alt="FJELL cabin — black cube on white">
+<!-- PAGE 3: GALLERY - Mountain forest winter -->
+<section class="page" id="p-gallery">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=80" alt="Mountain forest landscape">
 </div>
-<div class="cube-info">
-<h3 data-en="Pure geometry." data-no="Ren geometri." data-lt="Gryna geometrija.">Pure geometry.</h3>
-<p data-en="Every dimension calculated. Every connector purposeful. A black volume against the Norwegian landscape." data-no="Hver dimensjon beregnet. Hver kobling meningsfull. Et svart volum mot det norske landskapet." data-lt="Kiekvienas matmuo apskaičiuotas. Kiekviena jungtis tikslinga. Juodas tūris norvegų kraštovaizdyje.">Every dimension calculated. Every connector purposeful. A black volume against the Norwegian landscape.</p>
-<div class="cube-specs">
-<span>2,900mm</span> × <span>4,900mm</span> × <span>2,700mm</span><br>
-<span>12.42m²</span> interior · <span>14.85m²</span> BYA<br>
-<span>6061-T6</span> aluminium · <span>Steico ST200</span> LVL<br>
-<span>U=0.16</span> walls · <span>U=0.12</span> roof
-</div>
-</div>
-</div>
-</div>
-
-<section id="gallery">
-<div class="si">
+<div class="page-content">
 <div class="sl" data-en="Gallery" data-no="Galleri" data-lt="Galerija">Gallery</div>
 <h2 class="st" data-en="See the details" data-no="Se detaljene" data-lt="Matykite Detalių">See the details</h2>
 <p class="sd" data-en="Every component designed for precision manufacturing." data-no="Hver komponent designet for presisjonsproduksjon." data-lt="Kiekvienas komponentas suprojektuotas tiksliai gamybai.">Every component designed for precision manufacturing.</p>
@@ -446,11 +386,16 @@ section{padding:60px 16px}
 <div class="gi g6"><img src="images/Copilot_20260329_012102.2.png" alt="Exterior detail" loading="lazy"><div class="gc" data-en="Exterior architectural detail" data-no="Eksteriør arkitektonisk detalj" data-lt="Išorės architektūrinė detalė">Exterior architectural detail</div></div>
 <div class="gi g7"><img src="images/exterior-hero.png" alt="Cabin exterior" loading="lazy"><div class="gc" data-en="Cabin exterior — larch cladding" data-no="Hyttas eksteriør — lerklekledning" data-lt="Namelių išorė — maumedžio apdaila">Cabin exterior — larch cladding</div></div>
 </div>
+<div class="caption" data-en="7 images — interior, structural, and exterior views" data-no="7 bilder — interiør, struktur og eksteriør visninger" data-lt="7 vaizdai — interjero, struktūros ir išorės vaizdai">7 images — interior, structural, and exterior views</div>
 </div>
 </section>
 
-<section id="pricing" class="pricing">
-<div class="si">
+<!-- PAGE 4: PRICING - Autumn forest -->
+<section class="page" id="p-pricing">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80" alt="Autumn forest">
+</div>
+<div class="page-content">
 <div class="sl" data-en="Three Tiers" data-no="Tre Nivåer" data-lt="Trys Lygiai">Three Tiers</div>
 <h2 class="st" data-en="Digital file packages" data-no="Digitale filpakker" data-lt="Skaitmeninių failų paketai">Digital file packages</h2>
 <p class="sd" data-en="Every tier includes all 40 DXF files, 6 STL files, and interactive browser tools." data-no="Hvert nivå inkluderer alle 40 DXF-filer, 6 STL-filer og interaktive nettleserverktøy." data-lt="Kiekviename lygyje yra visi 40 DXF failų, 6 STL failai ir interaktyvūs įrankiai.">Every tier includes all 40 DXF files, 6 STL files, and interactive browser tools.</p>
@@ -512,13 +457,16 @@ section{padding:60px 16px}
 <tr><td>ROAM</td><td>2,500 NOK</td><td class="pv">~107,000 NOK</td><td class="pv">~157,000 NOK</td></tr>
 </table>
 </div>
-
-</div>
+<div class="caption" data-en="Prices include 25% Norwegian VAT · Final pricing subject to supplier verification" data-no="Priser inkluderer 25% norsk MVA · Endelig pris avhengig av leverandørbekreftelse" data-lt="Kainos includes 25% Norvegijos PVM · Galutinė kaina priklauso nuo tiekėjo patvirtinimo">Prices include 25% Norwegian VAT · Final pricing subject to supplier verification</div>
 </div>
 </section>
 
-<section id="comparison">
-<div class="si">
+<!-- PAGE 5: COMPARISON + TOOLS - Stormy coast -->
+<section class="page" id="p-compare">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1920&q=80" alt="Stormy coast">
+</div>
+<div class="page-content">
 <div class="sl" data-en="Market Comparison" data-no="Markedssammenligning" data-lt="Rinkos Palyginimas">Market Comparison</div>
 <h2 class="st" data-en="Why FJELL wins" data-no="Hvorfor FJELL vinner" data-lt="Kodėl FJELL Laimi">Why FJELL wins</h2>
 <p class="sd" data-en="Real competitor data from the Norwegian market (2026)." data-no="Ekte konkurrentdata fra det norske markedet (2026)." data-lt="Tikri konkurentų duomenys iš Norvegijos rinkos (2026).">Real competitor data from the Norwegian market (2026).</p>
@@ -529,14 +477,9 @@ section{padding:60px 16px}
 <tr class="hl"><td>FJELL LAND (self-build)</td><td>12.42m²</td><td>~93,400</td><td>~7,520</td></tr>
 <tr class="hl"><td>FJELL LAND (turnkey)</td><td>12.42m²</td><td>~152,000</td><td>~12,240</td></tr>
 </table>
-</div>
-</section>
 
-<section id="tools">
-<div class="si">
-<div class="sl" data-en="Included Free" data-no="Inkludert Gratis" data-lt="Įtraukta Nemokamai">Included Free</div>
+<div class="sl" style="margin-top:40px" data-en="Included Free" data-no="Inkludert Gratis" data-lt="Įtraukta Nemokamai">Included Free</div>
 <h2 class="st" data-en="Interactive tools" data-no="Interaktive verktøy" data-lt="Interaktyvūs įrankiai">Interactive tools</h2>
-<p class="sd" data-en="Every package includes tools that work offline." data-no="Hver pakke inkluderer verktøy som fungerer offline." data-lt="Kiekviename pakete yra įrankiai, veikiantys offline.">Every package includes tools that work offline.</p>
 <div class="tg">
 <a href="tools/material-calculator.html" class="tc" style="text-decoration:none;color:inherit;display:block">
 <div class="ti">01 — <span data-en="CALCULATOR" data-no="KALKULATOR" data-lt="SKAIČIUOKLĖ">CALCULATOR</span></div>
@@ -551,17 +494,23 @@ section{padding:60px 16px}
 <div class="tt"><span>AUTO-SAVE</span><span>PRINTABLE</span><span>4 SEASONS</span></div>
 </a>
 </div>
+<div class="caption" data-en="Tools work offline · No install · No subscription" data-no="Verktøy fungerer offline · Ingen installasjon · Ingen abonnement" data-lt="Įrankiai veikia offline · Jokių diegimų · Jokių prenumeratų">Tools work offline · No install · No subscription</div>
 </div>
 </section>
 
-<section id="specs">
-<div class="si">
+<!-- PAGE 6: SPECS - Snowy mountains -->
+<section class="page" id="p-specs">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=1920&q=80" alt="Snowy mountains">
+</div>
+<div class="page-content">
 <div class="sl" data-en="Technical" data-no="Teknisk" data-lt="Techninis">Technical</div>
 <h2 class="st" data-en="Engineered for Nordic climates" data-no="Konstruert for nordisk klima" data-lt="Suprojektuota šiauriniam klimatui">Engineered for Nordic climates</h2>
 <p class="sd" data-en="Every specification verified. Every connection tested." data-no="Hver spesifikasjon verifisert. Hver kobling testet." data-lt="Kiekviena specifikacija patikrinta. Kiekviena jungtis ištestuota.">Every specification verified. Every connection tested.</p>
 <div class="sw">
 <div>
 <img src="images/davinci_construction_quality_composite__2_2_grid_layout_on.png" alt="FJELL structural engineering" loading="lazy">
+<div class="caption" data-en="Construction quality composite — all connector details" data-no="Konstruksjonskvalitet kompositt — alle koblingsdetaljer" data-lt="Statybos kokybės kompozitas — visos jungčių detalės">Construction quality composite — all connector details</div>
 </div>
 <div>
 <ul class="slist">
@@ -578,11 +527,16 @@ section{padding:60px 16px}
 </ul>
 </div>
 </div>
+<div class="caption" data-en="All specifications verified against TEK17 and NS-EN standards" data-no="Alle spesifikasjoner verifisert mot TEK17 og NS-EN standarder" data-lt="Visos specifikacijos patikrintos pagal TEK17 ir NS-EN standartus">All specifications verified against TEK17 and NS-EN standards</div>
 </div>
 </section>
 
-<section id="faq">
-<div class="si">
+<!-- PAGE 7: FAQ + CTA - Calm fjord -->
+<section class="page" id="p-faq">
+<div class="page-bg">
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=80" alt="Calm fjord landscape">
+</div>
+<div class="page-content">
 <div class="sl" data-en="Questions" data-no="Spørsmål" data-lt="Klausimai">Questions</div>
 <h2 class="st" data-en="Frequently asked" data-no="Ofte spurt" data-lt="Dažnai Užduodami">Frequently asked</h2>
 <div class="faq">
@@ -592,13 +546,27 @@ section{padding:60px 16px}
 <div class="faq-i"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-en="What's the total cost including materials?" data-no="Hva er totalkostnaden inkludert materialer?" data-lt="Kokia bendra kaina įskaitant medžiagas?">What's the total cost including materials?</div><div class="faq-a" data-en="Digital files start at €250. Materials cost approximately €7,480-€8,570 for a self-build. Full turnkey ~€12,170-€12,770." data-no="Digitale filer starter på €250. Materialer koster omtrent €7,480-€8,570 for selvbygging. Full nøkkelklar ~€12,170-€12,770." data-lt="Skaitmeniniai failai nuo €250. Medžiagos kainuoja apie €7,480-€8,570 savarankiškai statybai. Pilnai paruoštas ~€12,170-€12,770.">Digital files start at €250. Materials cost approximately €7,480-€8,570 for a self-build. Full turnkey ~€12,170-€12,770.</div></div>
 <div class="faq-i"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')" data-en="What software do I need?" data-no="Hvilken programvare trenger jeg?" data-lt="Kokios programinės įrangos reikia?">What software do I need?</div><div class="faq-a" data-en="DXF files open in LibreCAD (free), AutoCAD, FreeCAD, or any CAD software. Send directly to any aluminium CNC fabricator." data-no="DXF-filer åpnes i LibreCAD (gratis), AutoCAD, FreeCAD, eller hvilken som helst CAD-programvare. Send direkte til hvilken som helst aluminium CNC-produsent." data-lt="DXF failai atidaromi LibreCAD (nemokamai), AutoCAD, FreeCAD arba bet kurioje CAD programoje. Siųskite tiesiogiai bet kuriam aliuminio CNC gamintojui.">DXF files open in LibreCAD (free), AutoCAD, FreeCAD, or any CAD software. Send directly to any aluminium CNC fabricator.</div></div>
 </div>
-</div>
-</section>
 
-<div class="cta">
+<div class="cta" style="margin-top:40px">
 <h2 data-en="Ready to build?" data-no="Klar til å bygge?" data-lt="Pasiruošę statyti?">Ready to build?</h2>
 <p data-en="Get professional DXF & STL files. Manufacture connectors locally. Build in a weekend." data-no="Få profesjonelle DXF- og STL-filer. Produser koblinger lokalt. Bygg på en helg." data-lt="Gaukite profesionalius DXF ir STL failus. Gaminkite jungtis vietoje. Pastatykite per savaitgalį.">Get professional DXF & STL files. Manufacture connectors locally. Build in a weekend.</p>
 <a href="mailto:pagalysm@gmail.com?subject=FJELL%20Order%20Inquiry" class="btn" data-en="Contact Us" data-no="Kontakt Oss" data-lt="Susisiekite">Contact Us</a>
+</div>
+<div class="caption" data-en="FJELL™ — Norwegian Design · Norwegian Climate · Norwegian Quality" data-no="FJELL™ — Norsk Design · Norsk Klima · Norsk Kvalitet" data-lt="FJELL™ — Norvegiškas Dizainas · Norvegiškas Klimatas · Norvegiška Kokybė">FJELL™ — Norwegian Design · Norwegian Climate · Norwegian Quality</div>
+</div>
+</section>
+
+</div>
+
+<!-- PAGE INDICATOR DOTS -->
+<div class="page-indicator">
+<div class="page-dot active" onclick="scrollToPage(0)"></div>
+<div class="page-dot" onclick="scrollToPage(1)"></div>
+<div class="page-dot" onclick="scrollToPage(2)"></div>
+<div class="page-dot" onclick="scrollToPage(3)"></div>
+<div class="page-dot" onclick="scrollToPage(4)"></div>
+<div class="page-dot" onclick="scrollToPage(5)"></div>
+<div class="page-dot" onclick="scrollToPage(6)"></div>
 </div>
 
 <footer>
@@ -609,11 +577,11 @@ section{padding:60px 16px}
 </div>
 <div class="fc">
 <h4 data-en="Products" data-no="Produkter" data-lt="Produktai">Products</h4>
-<a href="#cabins">LAND — <span data-en="Fixed" data-no="Fast" data-lt="Tvirtas">Fixed</span></a>
-<a href="#cabins">CAMP — <span data-en="Transportable" data-no="Transportabel" data-lt="Transportuojamas">Transportable</span></a>
-<a href="#cabins">FORM — <span data-en="Custom" data-no="Tilpasset" data-lt="Individualus">Custom</span></a>
-<a href="#cabins">ROAM — <span data-en="Mobile" data-no="Mobil" data-lt="Mobilus">Mobile</span></a>
-<a href="#pricing" data-en="Digital Files" data-no="Digitale Filer" data-lt="Skaitmeniniai Failai">Digital Files</a>
+<a href="#p-cabins">LAND — <span data-en="Fixed" data-no="Fast" data-lt="Tvirtas">Fixed</span></a>
+<a href="#p-cabins">CAMP — <span data-en="Transportable" data-no="Transportabel" data-lt="Transportuojamas">Transportable</span></a>
+<a href="#p-cabins">FORM — <span data-en="Custom" data-no="Tilpasset" data-lt="Individualus">Custom</span></a>
+<a href="#p-cabins">ROAM — <span data-en="Mobile" data-no="Mobil" data-lt="Mobilus">Mobile</span></a>
+<a href="#p-pricing" data-en="Digital Files" data-no="Digitale Filer" data-lt="Skaitmeniniai Failai">Digital Files</a>
 </div>
 <div class="fc">
 <h4 data-en="Contact" data-no="Kontakt" data-lt="Kontaktai">Contact</h4>
@@ -638,19 +606,36 @@ if(t)el.innerHTML=t;
 });
 document.documentElement.lang=lang;
 }
-// Side nav active state
-const sections=document.querySelectorAll('section[id],.hero,.cube,.cta');
-const sideLinks=document.querySelectorAll('.side-nav a');
-window.addEventListener('scroll',()=>{
-let current='';
-sections.forEach(s=>{
-const top=s.offsetTop-200;
-if(window.scrollY>=top)current=s.getAttribute('id')||'hero';
+
+// Horizontal scroll page indicator
+const hScroll=document.getElementById('hScroll');
+const dots=document.querySelectorAll('.page-dot');
+function scrollToPage(i){
+const pages=hScroll.querySelectorAll('.page');
+if(pages[i])pages[i].scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'});
+}
+hScroll.addEventListener('scroll',()=>{
+const pages=hScroll.querySelectorAll('.page');
+const scrollLeft=hScroll.scrollLeft;
+const pageWidth=window.innerWidth;
+let active=Math.round(scrollLeft/pageWidth);
+if(active>=pages.length)active=pages.length-1;
+dots.forEach((d,i)=>d.classList.toggle('active',i===active));
 });
-sideLinks.forEach(a=>{
-a.classList.remove('active');
-if(a.getAttribute('href')==='#'+current)a.classList.add('active');
-});
+
+// Keyboard navigation
+document.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'){
+const pages=hScroll.querySelectorAll('.page');
+let current=0;
+pages.forEach((p,i)=>{if(hScroll.scrollLeft>=p.offsetLeft-100)current=i;});
+if(current<pages.length-1)scrollToPage(current+1);
+}else if(e.key==='ArrowLeft'){
+const pages=hScroll.querySelectorAll('.page');
+let current=0;
+pages.forEach((p,i)=>{if(hScroll.scrollLeft>=p.offsetLeft-100)current=i;});
+if(current>0)scrollToPage(current-1);
+}
 });
 </script>
 
