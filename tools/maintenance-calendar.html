@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FJELL™ Maintenance Calendar</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--text:#e8e9ed;--muted:#8b8fa3;--spring:#4ade80;--summer:#fbbf24;--fall:#f97316;--winter:#60a5fa;--danger:#f87171}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:20px}
+header{text-align:center;padding:30px 0 20px;border-bottom:1px solid var(--border);margin-bottom:24px}
+header h1{font-size:1.8rem;font-weight:700;margin-bottom:4px}
+header h1 span{color:var(--spring)}
+header p{color:var(--muted);font-size:.9rem}
+.season-nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.season-btn{flex:1;min-width:120px;padding:12px 16px;border-radius:10px;border:2px solid var(--border);background:var(--card);color:var(--text);font-size:.85rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s}
+.season-btn:hover{border-color:var(--muted)}
+.season-btn.active-spring{border-color:var(--spring);color:var(--spring);background:rgba(74,222,128,.08)}
+.season-btn.active-summer{border-color:var(--summer);color:var(--summer);background:rgba(251,191,36,.08)}
+.season-btn.active-fall{border-color:var(--fall);color:var(--fall);background:rgba(249,115,22,.08)}
+.season-btn.active-winter{border-color:var(--winter);color:var(--winter);background:rgba(96,165,250,.08)}
+.progress-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:24px}
+.progress-bar h3{font-size:.85rem;color:var(--muted);margin-bottom:8px}
+.progress-track{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--spring);border-radius:4px;transition:width .3s}
+.progress-text{font-size:.8rem;color:var(--muted);margin-top:6px;text-align:right}
+.season-section{display:none}
+.season-section.active{display:block}
+.season-header{padding:16px;border-radius:12px;margin-bottom:16px}
+.season-header h2{font-size:1.2rem;margin-bottom:2px}
+.season-header p{font-size:.85rem;color:var(--muted)}
+.season-header.spring{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.2)}
+.season-header.summer{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2)}
+.season-header.fall{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2)}
+.season-header.winter{background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2)}
+.task-list{display:flex;flex-direction:column;gap:8px}
+.task{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px;transition:all .15s;cursor:pointer}
+.task:hover{border-color:var(--muted)}
+.task.done{opacity:.5}
+.task.done .task-name{text-decoration:line-through}
+.task-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s}
+.task.done .task-check{background:var(--spring);border-color:var(--spring)}
+.task-check svg{width:14px;height:14px;opacity:0;transition:opacity .15s}
+.task.done .task-check svg{opacity:1}
+.task-info{flex:1}
+.task-name{font-size:.9rem;font-weight:500;margin-bottom:2px}
+.task-notes{font-size:.78rem;color:var(--muted)}
+.task-meta{display:flex;gap:8px;flex-shrink:0;align-items:center}
+.task-priority{font-size:.65rem;padding:3px 8px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.task-priority.critical{background:rgba(248,113,113,.15);color:var(--danger)}
+.task-priority.high{background:rgba(249,115,22,.15);color:var(--fall)}
+.task-priority.medium{background:rgba(251,191,36,.15);color:var(--summer)}
+.task-priority.low{background:rgba(96,165,250,.15);color:var(--winter)}
+.task-time{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.emergency-kit{background:var(--card);border:1px solid var(--danger);border-radius:12px;padding:16px;margin-top:20px}
+.emergency-kit h3{color:var(--danger);font-size:.9rem;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.kit-items{display:flex;flex-wrap:wrap;gap:6px}
+.kit-item{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:6px 12px;font-size:.8rem}
+.month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-top:20px}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;font-size:.8rem}
+.month-card .month-name{font-weight:600;margin-bottom:4px}
+.month-card .month-task{color:var(--muted);font-size:.72rem}
+.month-card.spring{border-color:rgba(74,222,128,.3)}
+.month-card.summer{border-color:rgba(251,191,36,.3)}
+.month-card.fall{border-color:rgba(249,115,22,.3)}
+.month-card.winter{border-color:rgba(96,165,250,.3)}
+.btn-row{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.btn{padding:10px 20px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:.85rem;cursor:pointer;transition:all .15s;font-weight:500}
+.btn:hover{border-color:var(--spring);color:var(--spring)}
+.btn.primary{background:var(--spring);color:#000;border-color:var(--spring);font-weight:600}
+.btn.primary:hover{background:#22c55e}
+footer{text-align:center;padding:30px 0;color:var(--muted);font-size:.75rem;border-top:1px solid var(--border);margin-top:30px}
+@media print{.season-nav,.btn-row{display:none!important}.season-section{display:block!important;break-inside:avoid}.task-check{border-color:#333}.task.done .task-check{background:#333}}
+@media(max-width:500px){.season-nav{flex-direction:column}.task{flex-wrap:wrap}.task-meta{width:100%;justify-content:flex-end;margin-top:4px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1><span>FJELL™</span> Maintenance Calendar</h1>
+<p>Track your seasonal maintenance — check off tasks as you complete them</p>
+</header>
+
+<div class="progress-bar">
+<h3>Overall Progress</h3>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-text" id="progressText">0 of 0 tasks completed</div>
+</div>
+
+<div class="season-nav">
+<button class="season-btn active-spring" onclick="showSeason('spring')">🌱 Spring</button>
+<button class="season-btn" onclick="showSeason('summer')">☀️ Summer</button>
+<button class="season-btn" onclick="showSeason('fall')">🍂 Fall</button>
+<button class="season-btn" onclick="showSeason('winter')">❄️ Winter</button>
+</div>
+
+<div id="seasons"></div>
+
+<div class="month-grid" id="monthGrid"></div>
+
+<div class="btn-row">
+<button class="btn primary" onclick="window.print()">🖨️ Print All Seasons</button>
+<button class="btn" onclick="resetAll()">↺ Reset All</button>
+<button class="btn" onclick="exportProgress()">📋 Export Progress</button>
+</div>
+
+<footer>FJELL™ Maintenance Calendar v1.0 — April 2026 — Save your progress with Export</footer>
+</div>
+
+<script>
+const SEASONS={
+spring:{name:"Spring",emoji:"🌱",subtitle:"Wake Up — Post-winter inspection",color:"spring",tasks:[
+{name:"Inspect roof for storm damage",notes:"Check EPDM for tears, pooling water",priority:"high",time:"30 min"},
+{name:"Check all seals around windows/doors",notes:"Replace cracked or compressed seals",priority:"high",time:"20 min"},
+{name:"Clear drainage paths",notes:"Remove debris from roof drains, gutters",priority:"high",time:"15 min"},
+{name:"Inspect cladding for winter damage",notes:"Look for loose boards, water stains",priority:"medium",time:"20 min"},
+{name:"Test ventilation cavity airflow",notes:"Ensure bottom/top vents are clear",priority:"medium",time:"10 min"},
+{name:"Check interior for moisture signs",notes:"Look for condensation, mold, stains",priority:"medium",time:"15 min"},
+{name:"Clean windows inside and out",notes:"Check seals while cleaning",priority:"low",time:"20 min"},
+{name:"Test door operation and seal",notes:"Lubricate hinges if needed",priority:"low",time:"10 min"},
+{name:"Inspect electrical connections",notes:"Check for corrosion, loose wires",priority:"medium",time:"15 min"},
+{name:"Re-stain/oil exterior if needed",notes:"Every 2-3 years for wood cladding",priority:"low",time:"2-3 hrs"}
+]},
+summer:{name:"Summer",emoji:"☀️",subtitle:"Maintain & Enjoy — Peak usage season",color:"summer",tasks:[
+{name:"Monthly roof inspection after storms",notes:"Quick visual check for damage",priority:"medium",time:"15 min"},
+{name:"Check window seals after UV exposure",notes:"UV can degrade seals over time",priority:"medium",time:"10 min"},
+{name:"Clean ventilation openings",notes:"Remove spider webs, debris",priority:"low",time:"10 min"},
+{name:"Touch up exterior finish",notes:"Fix scratches, fading spots",priority:"low",time:"1-2 hrs"},
+{name:"Check door threshold seal",notes:"Ensure water can't enter",priority:"low",time:"5 min"},
+{name:"Inspect interior for summer humidity",notes:"Run dehumidifier if needed",priority:"low",time:"10 min"},
+{name:"Test smoke detector",notes:"Replace battery annually",priority:"medium",time:"5 min"},
+{name:"Clean EPDM surface",notes:"Remove algae, dirt buildup",priority:"low",time:"20 min"},
+{name:"Check connector bolts",notes:"Tighten if loose",priority:"medium",time:"15 min"},
+{name:"Document condition with photos",notes:"Useful for insurance claims",priority:"low",time:"15 min"}
+]},
+fall:{name:"Fall",emoji:"🍂",subtitle:"Winter Prep — Most important season",color:"fall",tasks:[
+{name:"Full roof inspection",notes:"Detailed check of all EPDM seams",priority:"critical",time:"45 min"},
+{name:"Replace window seals if worn",notes:"Don't wait until winter",priority:"high",time:"30 min"},
+{name:"Clear ALL drainage paths",notes:"Roofs, gutters, ground drainage",priority:"critical",time:"20 min"},
+{name:"Check insulation integrity",notes:"Look for gaps, compression",priority:"high",time:"20 min"},
+{name:"Seal any gaps in exterior",notes:"Use EPDM-compatible sealant",priority:"high",time:"30 min"},
+{name:"Test heating system",notes:"Before first freeze",priority:"high",time:"30 min"},
+{name:"Check door weather stripping",notes:"Replace if compressed",priority:"medium",time:"10 min"},
+{name:"Secure loose items outside",notes:"Wind can damage cladding",priority:"medium",time:"15 min"},
+{name:"Winterize plumbing",notes:"Drain pipes, insulate",priority:"high",time:"30 min"},
+{name:"Stock emergency repair kit",notes:"EPDM patches, sealant, tape",priority:"medium",time:"10 min"}
+]},
+winter:{name:"Winter",emoji:"❄️",subtitle:"Monitor & Protect — Minimal maintenance",color:"winter",tasks:[
+{name:"Clear snow from roof if >30cm",notes:"Use soft brush, don't damage EPDM",priority:"high",time:"30 min"},
+{name:"Check for ice dams",notes:"Prevents water backup under EPDM",priority:"high",time:"10 min"},
+{name:"Monitor interior temperature",notes:"Ensure heating is working",priority:"medium",time:"5 min"},
+{name:"Check for drafts",notes:"Feel around windows, doors",priority:"medium",time:"10 min"},
+{name:"Clear snow from door access",notes:"Keep entry clear",priority:"low",time:"10 min"},
+{name:"Inspect after storms",notes:"Check for wind damage",priority:"high",time:"15 min"},
+{name:"Run ventilation briefly",notes:"Prevent moisture buildup",priority:"low",time:"10 min"},
+{name:"Check for icicles at edges",notes:"Indicates heat loss issues",priority:"medium",time:"5 min"}
+]}
+};
+
+const MONTHS=[
+{name:"January",season:"winter",task:"Snow/ice monitoring"},
+{name:"February",season:"winter",task:"Snow/ice monitoring"},
+{name:"March",season:"spring",task:"Full spring inspection"},
+{name:"April",season:"spring",task:"Exterior touch-ups"},
+{name:"May",season:"spring",task:"Deep clean + document"},
+{name:"June",season:"summer",task:"Summer setup"},
+{name:"July",season:"summer",task:"Mid-summer check"},
+{name:"August",season:"summer",task:"Pre-fall prep"},
+{name:"September",season:"fall",task:"Fall inspection start"},
+{name:"October",season:"fall",task:"Winter preparation"},
+{name:"November",season:"fall",task:"Final winter checks"},
+{name:"December",season:"winter",task:"Winter monitoring"}
+];
+
+let state={};
+const STORAGE_KEY="fjell_maintenance_state";
+
+function loadState(){
+try{const s=localStorage.getItem(STORAGE_KEY);if(s)state=JSON.parse(s)}catch(e){}
+}
+
+function saveState(){
+try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}
+}
+
+function taskKey(season,idx){return season+"_"+idx}
+
+function showSeason(season){
+document.querySelectorAll(".season-btn").forEach(b=>{b.className="season-btn"});
+const btns=document.querySelectorAll(".season-btn");
+const idx=["spring","summer","fall","winter"].indexOf(season);
+btns[idx].classList.add("active-"+season);
+document.querySelectorAll(".season-section").forEach(s=>s.classList.remove("active"));
+document.getElementById("season_"+season).classList.add("active");
+}
+
+function render(){
+const container=document.getElementById("seasons");
+let html="";
+for(const[sKey,sData]of Object.entries(SEASONS)){
+html+=`<div class="season-section ${sKey==='spring'?'active':''}" id="season_${sKey}">
+<div class="season-header ${sData.color}">
+<h2>${sData.emoji} ${sData.name}</h2>
+<p>${sData.subtitle}</p>
+</div>
+<div class="task-list">`;
+sData.tasks.forEach((task,i)=>{
+const key=taskKey(sKey,i);
+const done=state[key]||false;
+html+=`<div class="task ${done?'done':''}" onclick="toggleTask('${key}',this)">
+<div class="task-check"><svg viewBox="0 0 14 14" fill="none"><path d="M2 7l3.5 3.5L12 3" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<div class="task-info">
+<div class="task-name">${task.name}</div>
+<div class="task-notes">${task.notes}</div>
+</div>
+<div class="task-meta">
+<span class="task-priority ${task.priority}">${task.priority}</span>
+<span class="task-time">${task.time}</span>
+</div>
+</div>`;
+});
+html+=`</div></div>`;
+}
+container.innerHTML=html;
+renderMonths();
+updateProgress();
+}
+
+function toggleTask(key,el){
+state[key]=!state[key];
+el.classList.toggle("done");
+saveState();
+updateProgress();
+}
+
+function updateProgress(){
+let total=0,done=0;
+for(const sData of Object.values(SEASONS)){
+total+=sData.tasks.length;
+sData.tasks.forEach((_,i)=>{if(state[taskKey(Object.keys(SEASONS).find(k=>SEASONS[k]===sData),i)])done++});
+}
+const pct=total?Math.round(done/total*100):0;
+document.getElementById("progressFill").style.width=pct+"%";
+document.getElementById("progressText").textContent=`${done} of ${total} tasks completed (${pct}%)`;
+}
+
+function renderMonths(){
+const grid=document.getElementById("monthGrid");
+grid.innerHTML=MONTHS.map(m=>`<div class="month-card ${m.season}"><div class="month-name">${m.name}</div><div class="month-task">${m.task}</div></div>`).join("");
+}
+
+function resetAll(){
+if(confirm("Reset all task progress?")){state={};saveState();render()}
+}
+
+function exportProgress(){
+const data={exported:new Date().toISOString(),tasks:state};
+const json=JSON.stringify(data,null,2);
+navigator.clipboard.writeText(json).then(()=>{
+const btn=event.target;
+const orig=btn.textContent;
+btn.textContent="✅ Copied!";
+setTimeout(()=>btn.textContent=orig,2000);
+});
+}
+
+loadState();
+render();
+</script>
+</body>
+</html>
