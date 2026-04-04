@@ -8,6 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -41,6 +44,9 @@ img{max-width:100%;display:block}
 
 /* PAGE CONTENT */
 .page-content{position:relative;z-index:2;max-width:1200px;width:100%;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;height:100%}
+.hero-cabin{position:absolute;right:60px;bottom:60px;z-index:2;width:360px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.4);backdrop-filter:blur(4px)}
+.hero-cabin img{width:100%;filter:grayscale(10%)}
+.hero-cabin .hc-cap{padding:8px 12px;font-family:var(--tech);font-size:.7rem;color:var(--yellow);letter-spacing:.04em}
 
 /* NAV */
 nav{position:fixed;top:0;left:1px;right:0;z-index:1000;background:rgba(0,0,0,.8);backdrop-filter:blur(16px);padding:0 24px}
@@ -219,6 +225,37 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;backgro
 .page-indicator{display:none}
 .nav-links{display:none}
 .nav-mobile{display:block}
+/* Mobile: larger fonts */
+.hero-cabin{display:none!important}
+.hero-title{font-size:clamp(1.8rem,6vw,2.8rem)!important}
+.hero-sub{font-size:1rem!important}
+.hero-stat strong{font-size:1.5rem!important}
+.hero-stat{font-size:.65rem!important}
+.sl{font-size:.65rem!important}
+.st{font-size:clamp(1.4rem,5vw,2rem)!important}
+.sd{font-size:1rem!important}
+.caption{font-size:1rem!important}
+.cb h3{font-size:1rem!important}
+.cb .cs{font-size:.7rem!important}
+.csp-i span{font-size:.8rem!important}
+.pp{font-size:2.2rem!important}
+.pd{font-size:.85rem!important}
+.pf li{font-size:.8rem!important}
+.tc h3{font-size:1rem!important}
+.tc p{font-size:.85rem!important}
+.slist li{font-size:.9rem!important}
+.slist li strong{min-width:100px!important;font-size:.6rem!important}
+.faq-q{font-size:1rem!important}
+.faq-a{font-size:.85rem!important}
+.cta h2{font-size:clamp(1.2rem,5vw,1.8rem)!important}
+.cta p{font-size:1rem!important}
+/* Mobile: stack tables */
+.ctbl,.ptbl{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ctbl th,.ctbl td,.ptbl th,.ptbl td{font-size:.8rem!important;padding:10px 8px!important}
+/* Mobile: responsive images */
+.ci{height:260px!important}
+.sw img{width:100%!important;height:auto!important}
+.gi img{width:100%!important;height:100%!important;object-fit:cover!important}
 }
 @media(max-width:768px){
 .hero-title{font-size:2rem}
@@ -328,7 +365,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;backgro
 <div class="page-content">
 <div class="hero-label" data-en="Norwegian Design · No Building Permit · Under 15m²" data-no="Norsk Design · Ingen Byggetillatelse · Under 15m²" data-lt="Norvegiškas Dizainas · Be Leidimo · Iki 15m²">Norwegian Design · No Building Permit · Under 15m²</div>
 <h1 class="hero-title" data-en="<em>Alive</em> from<br><span class='bp'>BLUEPRINTS.</span>" data-no="<em>Levende</em> fra<br><span class='bp'>TEGNINGER.</span>" data-lt="<em>Gyvas</em> iš<br><span class='bp'>BRĖŽINIŲ.</span>"><em>Alive</em> from<br><span class="bp">BLUEPRINTS.</span></h1>
-<p class="hero-sub" data-en="40 precision DXF files + 6 STL files. Manufacture the connectors yourself. Source materials locally. Build a cabin that belongs to the landscape — in one weekend." data-no="40 presise DXF-filer + 6 STL-filer. Produser koblingene selv. Skaff materialer lokalt. Bygg en hytte som hører hjemme i landskapet — på en helg." data-lt="40 tikslių DXF failų + 6 STL failai. Gaminkite jungtis patys. Medžiagas rinkitės vietoje. Pastatykite namelį, kuris priklauso kraštovaizdžiui — per vieną savaitgalį.">40 precision DXF files + 6 STL files. Manufacture the connectors yourself. Source materials locally. Build a cabin that belongs to the landscape — in one weekend.</p>
+<p class="hero-sub" data-en="40 DXF + 6 STL files. Manufacture connectors yourself. Build in one weekend." data-no="40 DXF + 6 STL filer. Produser koblinger selv. Bygg på en helg." data-lt="40 DXF + 6 STL failai. Gaminkite jungtis patys. Pastatykite per savaitgalį.">40 DXF + 6 STL files. Manufacture connectors yourself. Build in one weekend.</p>
 <div class="hero-stats">
 <div class="hero-stat"><strong>40</strong>DXF Files</div>
 <div class="hero-stat"><strong>6</strong>STL Files</div>
@@ -336,10 +373,14 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;backgro
 <div class="hero-stat"><strong>≤15m²</strong>No Permit</div>
 </div>
 <div class="hero-actions">
-<a href="#p-pricing" class="btn btn-blue" data-en="View Pricing →" data-no="Se Priser →" data-lt="Žiūrėti Kainas →">View Pricing →</a>
-<a href="#p-cabins" class="btn btn-ghost" data-en="4 Packages ↓" data-no="4 Pakker ↓" data-lt="4 Paketai ↓">4 Packages ↓</a>
+<a href="#p-pricing" class="btn btn-blue" data-en="Get Files — €250" data-no="Få Filer — €250" data-lt="Gauti Failus — €250">Get Files — €250</a>
+<a href="#p-cabins" class="btn btn-ghost" data-en="4 Packages" data-no="4 Pakker" data-lt="4 Paketai">4 Packages</a>
 </div>
-<div class="caption" data-en="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interior" data-no="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interiør" data-lt="FJELL™ LAND — 2,900 × 4,900mm · 12.42m² vidus">FJELL™ LAND — 2,900 × 4,900mm · 12.42m² interior</div>
+</div>
+<div class="hero-cabin">
+<img src="images/charcoal_land.png" alt="FJELL LAND cabin">
+<div class="hc-cap">FJELL™ LAND · 2,900 × 4,900mm · 12.42m²</div>
+</div>
 </div>
 </section>
 
@@ -616,7 +657,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;backgro
 <li data-en="Material cost calculator" data-no="Materialkostnadskalkulator" data-lt="Medžiagų kainų skaičiuoklė">Material cost calculator</li>
 <li data-en="Maintenance calendar" data-no="Vedlikeholdskalender" data-lt="Priežiūros kalendorius">Maintenance calendar</li>
 </ul>
-<a href="mailto:pagalysm@gmail.com?subject=FJELL%20BASIC%20Order" class="btn bo" data-en="Get BASIC" data-no="Få GRUNNLEGGENDE" data-lt="Gauti BAZINĮ">Get BASIC</a>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20BASIC%20Order" class="btn bf" data-en="Get BASIC — €250" data-no="Få GRUNNLEGGENDE — €250" data-lt="Gauti BAZINĮ — €250">Get BASIC — €250</a>
 </div>
 
 <div class="pc feat">
@@ -646,7 +687,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px 16px;backgro
 <li data-en="Custom file modifications" data-no="Tilpassede filmodifikasjoner" data-lt="Individualūs failų pakeitimai">Custom file modifications</li>
 <li data-en="STEP/IGES 3D CAD files" data-no="STEP/IGES 3D CAD-filer" data-lt="STEP/IGES 3D CAD failai">STEP/IGES 3D CAD files</li>
 </ul>
-<a href="mailto:pagalysm@gmail.com?subject=FJELL%20PREMIUM%20Order" class="btn bo" data-en="Get PREMIUM" data-no="Få PREMIUM" data-lt="Gauti PREMIUM">Get PREMIUM</a>
+<a href="mailto:pagalysm@gmail.com?subject=FJELL%20PREMIUM%20Order" class="btn bf" data-en="Get PREMIUM — €800" data-no="Få PREMIUM — €800" data-lt="Gauti PREMIUM — €800">Get PREMIUM — €800</a>
 </div>
 
 </div>
