@@ -1072,6 +1072,39 @@ pages.forEach((p,i)=>{if(hScroll.scrollLeft>=p.offsetLeft-100)current=i;});
 if(current>0)scrollToPage(current-1);
 }
 });
+
+// Mobile touch handling for horizontal scroll
+let touchStartX=0,touchStartY=0,touchStartTime=0;
+document.addEventListener('touchstart',e=>{
+touchStartX=e.touches[0].clientX;
+touchStartY=e.touches[0].clientY;
+touchStartTime=Date.now();
+},{passive:true});
+document.addEventListener('touchmove',e=>{
+if(!touchStartX)return;
+const dx=e.touches[0].clientX-touchStartX;
+const dy=e.touches[0].clientY-touchStartY;
+if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>30){
+e.preventDefault();
+hScroll.scrollLeft-=dx*0.5;
+touchStartX=e.touches[0].clientX;
+}
+},{passive:false});
+document.addEventListener('touchend',e=>{
+if(!touchStartX)return;
+const elapsed=Date.now()-touchStartTime;
+const pageWidth=window.innerWidth;
+const pages=hScroll.querySelectorAll('.page');
+let current=0;
+pages.forEach((p,i)=>{if(hScroll.scrollLeft>=p.offsetLeft-50)current=i;});
+const elapsed2=Date.now()-touchStartTime;
+if(elapsed2<300){
+const dx=e.changedTouches[0].clientX-touchStartX;
+if(dx<-50&&current<pages.length-1)scrollToPage(current+1);
+else if(dx>50&&current>0)scrollToPage(current-1);
+}
+touchStartX=0;touchStartY=0;
+},{passive:true});
 </script>
 
 </body>
